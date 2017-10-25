@@ -1,0 +1,33 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: $font-size;
+  font-family: $font-family;
+  background-color: $body-bg-color;
+}
+
+img {
+  vertical-align: middle;
+}
+
+img, iframe {
+  max-width: 100%;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}

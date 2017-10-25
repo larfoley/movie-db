@@ -1,0 +1,121 @@
+.u-clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.u-text-center {
+  text-align: center !important;
+}
+
+.u-inline {
+  display: inline-block !important;
+}
+
+.u-block {
+  display: block !important;
+}
+
+.u-margin {
+  margin: $margin !important;
+
+  &-none {
+    margin: 0 !important;
+  }
+  &.x2 {
+    margin: $margin * 2 !important;
+  }
+  &.x3 {
+    margin: $margin * 3 !important;
+  }
+  &.x4 {
+    margin: $margin * 4 !important;
+  }
+
+  &-vertical {
+    margin-top: $margin !important;
+    margin-bottom: $margin !important;
+    &.x2 {
+      margin-top: $margin * 2 !important;
+      margin-bottom: $margin * 2 !important;
+    }
+    &.x3 {
+      margin-top: $margin * 3 !important;
+      margin-bottom: $margin * 3 !important;
+    }
+    &.x4 {
+      margin-top: $margin * 4 !important;
+      margin-bottom: $margin * 4 !important;
+    }
+  }
+
+  &-horizontal {
+    margin-left: $margin !important;
+    margin-right: $margin !important;
+    &.x2 {
+      margin-left: $margin * 2 !important;
+      margin-right: $margin * 2 !important;
+    }
+    &.x3 {
+      margin-left: $margin * 3 !important;
+      margin-right: $margin * 3 !important;
+    }
+    &.x4 {
+      margin-left: $margin * 4 !important;
+      margin-right: $margin * 4 !important;
+    }
+  }
+
+}
+
+.u-padding {
+  padding: $padding !important;
+
+  &-none {
+    padding: 0 !important;
+  }
+  &.x2 {
+    padding: $padding * 2 !important;
+  }
+  &.x3 {
+    padding: $padding * 3 !important;
+  }
+  &.x4 {
+    padding: $padding * 4 !important;
+  }
+
+  &-vertical {
+    padding-top: $padding !important;
+    padding-bottom: $padding !important;
+    &.x2 {
+      padding-top: $padding * 2 !important;
+      padding-bottom: $padding * 2 !important;
+    }
+    &.x3 {
+      padding-top: $padding * 3 !important;
+      padding-bottom: $padding * 3 !important;
+    }
+    &.x4 {
+      padding-top: $padding * 4 !important;
+      padding-bottom: $padding * 4 !important;
+    }
+  }
+
+  &-horizontal {
+    padding-left: $padding !important;
+    padding-right: $padding !important;
+    &.x2 {
+      padding-left: $padding * 2 !important;
+      padding-right: $padding * 2 !important;
+    }
+    &.x3 {
+      padding-left: $padding * 3 !important;
+      padding-right: $padding * 3 !important;
+    }
+    &.x4 {
+      padding-left: $padding * 4 !important;
+      padding-right: $padding * 4 !important;
+    }
+  }
+
+}
