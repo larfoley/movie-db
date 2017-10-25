@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/mongoBasics');
+mongoose.connect('mongodb://localhost/movie-db');
 var db = mongoose.connection;
 
 var index = require('./routes/index');
