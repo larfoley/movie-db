@@ -1,0 +1,31 @@
+#form-container {
+	width: 258px;
+	height: 327px;
+	margin: 0 auto;
+	margin-top: 40px;
+	text-align: center;
+	background-color: #eeeeee;
+	border-radius: 5px;
+	>h2 {
+		padding-top: 16px;
+	}
+}
+#register-form {
+	>input {
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 17px;
+		width: 197px;
+		height: 36px;
+		border-radius: 5px;
+		border: none;
+		font-size: 13px;
+		font-family: "Nunito", "Helvetica", "Tahoma", "Verdana", sans-serif;
+	}
+}
+input {
+	&:last-child {
+		background-color: #333333;
+		color: white;
+	}
+}
