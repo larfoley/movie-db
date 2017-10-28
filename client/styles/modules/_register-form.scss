@@ -1,33 +1,43 @@
 .form-container {
-  padding: 0 50px 15px 50px;
+  padding: 2em;
 	margin: 0 auto;
 	margin-top: 40px;
 	text-align: center;
-	background-color: #eeeeee;
+	background-color: black;
 	border-radius: 5px;
-	>h2 {
-		padding-top: 16px;
-	}
-}
-.register-form {
-  margin: 0 auto;
   max-width: 500px;
-	input {
-		display: block;
-		margin: 0 auto;
-		margin-bottom: 17px;
-		width: 100%;
-		padding-top: 10px;
-		padding-bottom: 10px;
-		border-radius: 5px;
-		border: none;
-		font-size: 13px;
-		font-family: "Nunito", "Helvetica", "Tahoma", "Verdana", sans-serif;
-	}
 }
-input {
-	&:last-child {
-		background-color: #333333;
-		color: white;
-	}
+
+.form-input {
+  display: block;
+  margin-bottom: 17px;
+  width: 100%;
+  padding: 1em;
+  border-radius: 5px;
+  border: none;
+  font-family: inherit;
+  border: 3px solid;
+
+  &:focus {
+    outline: none;
+    border-color: red;
+  }
+}
+
+.form-heading {
+  color: white;
+}
+
+.form-input--submit {
+  background-color: $brand-color;
+  color: white;
+  transition: .3s;
+  border: none;
+  font-weight: bold;
+  margin-top: 2em;
+
+  &:hover {
+    cursor: pointer;
+    background-color: darken($brand-color, 10%);
+  }
 }
