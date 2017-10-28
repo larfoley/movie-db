@@ -1,6 +1,5 @@
-#form-container {
-	width: 258px;
-	height: 327px;
+.form-container {
+  padding: 0 50px 15px 50px;
 	margin: 0 auto;
 	margin-top: 40px;
 	text-align: center;
@@ -10,13 +9,16 @@
 		padding-top: 16px;
 	}
 }
-#register-form {
-	>input {
+.register-form {
+  margin: 0 auto;
+  max-width: 500px;
+	input {
 		display: block;
 		margin: 0 auto;
 		margin-bottom: 17px;
-		width: 197px;
-		height: 36px;
+		width: 100%;
+		padding-top: 10px;
+		padding-bottom: 10px;
 		border-radius: 5px;
 		border: none;
 		font-size: 13px;
