@@ -1,5 +1,5 @@
 .nav {
-  background-color: black;
+  background-color: $primary-color;
   @extend .u-clearfix;
 
   &-header {
@@ -17,12 +17,13 @@
     top: 0;
     margin-top: 77px;
     right: 0;
-    background-color: lighten(black, 10%);
+    background-color: darken($primary-color, 5%);
     transition-property: right;
     transition-duration: 1s;
+    z-index: 1;
 
     @media screen and (min-width: 700px) {
-      background-color: black;
+      background-color: $primary-color;
       position: static;
       left: auto;
       margin-top: 0;
