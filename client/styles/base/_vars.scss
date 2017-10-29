@@ -29,9 +29,10 @@ $colors: (
   "radical-red": #FF3366,
 );
 
-$brand-color: #f50;
 $brand-color: crimson;
-$body-bg-color: #fff;
+$brand-color: darken(crimson, 5%);
+$primary-color: #1d2733;
+$body-bg-color: #000;
 $text-color: #2e2e2e;
 $link-color: #0366d6;
 
