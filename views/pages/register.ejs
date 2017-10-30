@@ -8,9 +8,7 @@
       <% include ../partials/header %>
     </header>
       <main class="container">
-        <% if (locals.error) { %>
-        <h2><%= error %></h2>
-        <% } %>
+        <% include ../partials/flash-message %>
         <div class="form-container">
           <h2 class="form-heading">Register</h2>
           <form class="form" action="/register" method="POST">
