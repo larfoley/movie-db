@@ -8,10 +8,8 @@
       <% include ../partials/header %>
     </header>
       <main>
-        <% if (locals.error) { %>
-        <h2><%= error %></h2>
-        <% } %>
-        
+        <% include ../partials/flash-message %>
+
       </main>
     <footer>
       <% include ../partials/footer %>
