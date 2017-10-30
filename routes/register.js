@@ -19,7 +19,14 @@ router.post('/', function(req, res, next) {
     }
 
     if (user) {
-      return res.render('pages/register', {error: "User already registered"});
+      // User alread exists
+      return res.render('pages/register', {
+        activeLink: "register",
+        flash: {
+          type: "error",
+          message: "That user already exists"
+        }
+      });
     }
 
     new User({
@@ -31,7 +38,14 @@ router.post('/', function(req, res, next) {
         return next(err)
 
       } else {
-        res.render('pages/register', {error: "Thanks for registering"});
+        //User registration is scuccesfull
+        res.render('pages/register', {
+          activeLink: "register",
+          flash: {
+            type: "success",
+            message: "Thanks for registering"
+          }
+        });
       }
     })
 
