@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "build": "webpack"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -11,8 +12,19 @@
     "debug": "~2.6.9",
     "ejs": "^2.5.7",
     "express": "~4.15.5",
+    "mongodb": "^2.2.33",
     "mongoose": "^4.12.4",
     "morgan": "~1.9.0",
-    "serve-favicon": "~2.4.5"
+    "serve-favicon": "~2.4.5",
+    "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^2.0.0-beta.4",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "webpack": "2.2.1"
   }
 }

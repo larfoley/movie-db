@@ -1,4 +1,3 @@
-// api key: 87ef8a60645934be3e9195cfbd3f5235
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,8 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/movie-db');
+mongoose.connect('mongodb://larfoley:theowlsarenotwhattheyseem@ds237475.mlab.com:37475/movie-db');
 var db = mongoose.connection;
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -15,7 +15,9 @@ var register = require('./routes/register');
 
 var app = express();
 
-db.on('error', console.error.bind(console, 'connection error:'));
+db.on('error', function() {
+  console.error.call(console, 'connection error:')
+});
 db.once('open', function() {
   console.log("connected");
 });
