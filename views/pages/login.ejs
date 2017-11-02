@@ -8,8 +8,15 @@
       <% include ../partials/header %>
     </header>
       <main>
-        <% include ../partials/flash-message %>
-
+        <% if (locals.error) { %>
+        <h2><%= error %></h2>
+        <% } %>
+        <form action="/register" method="post">
+          <input type="text" name="name" value="" placeholder="Name">
+          <input type="email" name="email" placeholder="Email">
+          <input type="password" name="password" placeholder="Password">
+          <button type="submit" >Sign in</button>
+        </form>
       </main>
     <footer>
       <% include ../partials/footer %>
