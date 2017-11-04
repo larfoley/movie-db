@@ -1,4 +1,3 @@
 import './styles/index.scss';
-import foo from './js/foo.js'
-
-foo.logFoo()
+import ejsClient from './js/ejsClient.js';
+import json from "./js/getJson.js";
