@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <header class="site-header">
+      <% include ../partials/header %>
+    </header>
+    <main class="container">
+      <style media="screen">
+        .search-result {
+          width: 300px;
+          display: inline-block;
+          margin: 1em;
+        }
+
+        .search-result__footer {
+          background-color: white;
+          color: gray;
+        }
+
+        .search-result__footer p {
+          margin: 0;
+          padding: 1em;
+        }
+      </style>
+      <div class="search-results">
+        <% if (results.length > 0 ) {%>
+          <% results.forEach(function(results) {%>
+            <div class="search-result">
+              <img src="https://image.tmdb.org/t/p/w300<%= results.poster_path %>" alt="">
+              <div class="search-result__footer">
+                <p><%= results.title %></p>
+              </div>
+            </div>
+          <%}) %>
+        <%} else {%>
+          <p>No results found</p>
+        <%}%>
+      </div>
+    </main>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>
