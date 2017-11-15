@@ -1,0 +1,23 @@
+<!--
+boilerplate for ejs template
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <header class="site-header">
+      <% include ../partials/header %>
+    </header>
+    <main>
+      <div class="container white-text u-text-center">
+        <h1><%= err + " " + err.status %></h1>
+      </div>
+    </main>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>
