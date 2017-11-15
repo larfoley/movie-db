@@ -40,7 +40,7 @@ app.use('/register', register);
 app.use('/search', search);
 
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error('Page Not Found');
   err.status = 404;
   next(err);
 });
@@ -53,7 +53,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.send("Error Mesage: " + err);
+  res.render("pages/error", {err: err, status: err.status});
 });
 
 module.exports = app;
