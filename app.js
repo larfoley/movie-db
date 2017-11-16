@@ -5,8 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var satelize = require('satelize');
 var config = require('./config');
-
 mongoose.connect(config.database_url);
 var db = mongoose.connection;
 
@@ -35,6 +35,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
+
+  satelize.satelize({ip:'2a02:8084:80:6e00:3dcd:ffd6:93f1:d68'}, function(err, payload) {
+    req.country_code = payload.country_code;
+  });
+
+  next();
+})
 
 app.use('/', index);
 app.use('/login', login);
