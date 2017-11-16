@@ -10,10 +10,10 @@
     </div>
     <ul class="nav-list">
       <li class="nav-item">
-        <a class="nav-link <%= locals.activeLink === 'home'? 'active' : null %>" href="/">
-          <i class="fa fa-home" aria-hidden="true"></i>
-          Home
-        </a>
+        <form class="search-form" action="/search" method="post">
+          <input class="search-input" type="text" name="query" placeholder="Search for a Movie...">
+          <button><i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
       </li>
       <li class="nav-item">
         <a class="nav-link <%= locals.activeLink === 'login'? 'active' : null %>" href="/login">

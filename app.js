@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var satelize = require('satelize');
-mongoose.connect('mongodb://larfoley:theowlsarenotwhattheyseem@ds237475.mlab.com:37475/movie-db');
+var config = require('./config');
+mongoose.connect(config.database_url);
 var db = mongoose.connection;
 
 

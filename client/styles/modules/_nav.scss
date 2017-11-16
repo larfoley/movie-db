@@ -53,6 +53,9 @@
     font-weight: bold;
     text-decoration: none;
     line-height: 75px;
+    @media screen and (min-width: 700px) {
+      line-height: 90px;
+    }
   }
 
   .nav-list .nav-link {

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var https = require('https');
+var config = require('../config.js');
 
 var request = require("request");
 
@@ -12,7 +13,7 @@ router.post('/', function(req, res, next) {
     qs: {
       page: '1',
       language: 'en-US',
-      api_key: '87ef8a60645934be3e9195cfbd3f5235',
+      api_key: config.api_key,
       query: req.body.query || ""
     },
     body: '{}'

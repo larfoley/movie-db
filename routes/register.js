@@ -9,7 +9,9 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var userRequestIsValid = true;
-
+  if (!mongoose.connection._hasOpened) {
+    return next(new Error("unable to connect to db"))
+  }
   // check if user exists
   var query = User.findOne({ 'email': req.body.email });
 
