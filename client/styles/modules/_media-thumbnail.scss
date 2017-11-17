@@ -1,3 +1,20 @@
 .media-thumbnail {
-  color: red;
+  color: white;
+  width: 300px;
+  background-color: #1d2733;
+  margin: 1em;
+  display: inline-block;
+}
+
+.media-thumbnail__title {
+  margin-top: 0;
+  margin-bottom: .25em;
+}
+
+.media-thumbnail__year {
+  margin-bottom: 1em;
+}
+
+.media-thumbnail__info {
+  padding: 1.5em;
 }
