@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <header class="site-header">
+      <% include ../partials/header %>
+      <div class="container">
+        <h1 class="white-text">TV Shows</h1>
+        <form class="" action="/tv-shows" method="get">
+          <label for="">Select a Genre</label>
+          <select class="" name="genre">
+            <option value="">All</option>
+            <% genres.forEach(function(genre) { %>
+                <option value="<%= genre.id %>">
+                  <%= genre.name %>
+                </option>
+            <% }) %>
+          </select>
+          <label for="">Sort by</label>
+          <select class="" name="sort_by">
+            <option value="release_date.gte">Latest</option>
+            <option value="popularity.desc">Most Popular</option>
+            <option value="popularity.asc">Least Popular</option>
+          </select>
+          <input type="submit" name="" value="Search">
+        </form>
+      </div>
+    </header>
+    <main>
+      <% if (results) { %>
+        <% results.forEach(function (media) { %>
+          <p><%= media.title %></p>
+          <%- include('../partials/media-thumbnail', {
+            medai: "",
+            url: "",
+            img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
+            title: media.title,
+            rating: media.vote_average / 2,
+            year_released: parseInt(media.release_date)
+          }) %>
+        <% }) %>
+      <% } %>
+    </main>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>
