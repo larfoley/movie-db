@@ -10,9 +10,33 @@
       <main class="container">
         <section>
           <h2 class="sectiontitle">Popular</h2>
+            <ul>
+            <% for(var i = 0 ; i < popularMovies.length ; i++) { %>
+              <li><%- include('../partials/media-thumbnail', {
+                medai: "",
+                url: "",
+                img_url: "",
+                title: "",
+                rating: "",
+                year_released: ""
+              }); %></li>
+            <% } %>
+            </ul>
         </section>
         <section>
           <h2 class="sectiontitle">Lastest</h2>
+          <ul>
+          <% for(var i = 0 ; i < latestMovies.length ; i++) { %>
+            <li><%- include('../partials/media-thumbnail', {
+              medai: "",
+              url: "",
+              img_url: "",
+              title: "",
+              rating: "",
+              year_released: ""
+            }); %></li>
+          <% } %>
+          </ul>
         </section>
       </main>
     <footer>
