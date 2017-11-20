@@ -31,10 +31,7 @@
     <main>
       <% if (results) { %>
         <% results.forEach(function (media) { %>
-          <p><%= media.title %></p>
           <%- include('../partials/media-thumbnail', {
-            medai: "",
-            url: "",
             img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
             title: media.title,
             rating: media.vote_average / 2,
