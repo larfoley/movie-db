@@ -1,23 +1,31 @@
 <div class="media-thumbnail">
-  <img class="media-thumbnail__image" src="<%= medai-url %>" alt="">
-  <i class="fa fa-search-plus" aria-hidden="true"></i>
-  <span>View More Info</span>
-  <div class="media-thumbnail__info">
-    <h2 class="media-thumbnail__title">Dr Strangelove Or: How I Learned To Stop Worrying And Love The Bomb</h2>
-    <div class="media-thumbnail__year">1964</div>
-    <span>Rating</span>
-    <div>
-      <i class="fa fa-star" aria-hidden="true"></i>
-      <i class="fa fa-star" aria-hidden="true"></i>
-      <i class="fa fa-star" aria-hidden="true"></i>
-      <i class="fa fa-star" aria-hidden="true"></i>
-      <i class="fa fa-star-o" aria-hidden="true"></i>
-    </div>
-    <div>
-      <i class="fa fa-heart-o" aria-hidden="true"></i>
-      <i class="fa fa-plus" aria-hidden="true"></i>
-      <i class="fa fa-share-alt" aria-hidden="true"></i>
-      <i class="fa fa-eye-slash" aria-hidden="true"></i>
-    </div>
-  </div>
+	<img class="media-thumbnail__image" src="<%= img_url %>" alt="">
+	<i class="fa fa-search-plus" aria-hidden="true"></i>
+	<span>View More Info</span>
+	<div class="media-thumbnail__info">
+		<h3 class="media-thumbnail__title"><%= title %></h3>
+		<div class="media-thumbnail__year">
+			<%= year_released %>
+		</div>
+		<span>Rating</span>
+		<div>
+			<%= rating %>
+			<% for(var i = 0; i< Math.floor(rating); i++){ %>
+				<i class="fa fa-star media-thumbnail__rating" aria-hidden="true"></i>
+				<% if(i == Math.floor(rating)-1 && rating % 1 > 0){ %>
+					<i class="fa fa-star-half-o media-thumbnail__rating" aria-hidden="true"></i>
+					<% console.log(i%1); %>
+				<% } %>
+			<% } %>
+			<% for(var j = 0; j < 4 - i; j++){ %>
+				<i class="fa fa-star-o media-thumbnail__rating" aria-hidden="true"></i>
+			<% } %>
+		</div>
+		<div>
+			<i class="fa fa-heart-o" aria-hidden="true"></i>
+			<i class="fa fa-plus" aria-hidden="true"></i>
+			<i class="fa fa-share-alt" aria-hidden="true"></i>
+			<i class="fa fa-eye-slash" aria-hidden="true"></i>
+		</div>
+	</div>
 </div>
