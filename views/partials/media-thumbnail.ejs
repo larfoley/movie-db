@@ -9,15 +9,15 @@
 		</div>
 		<span>Rating</span>
 		<div>
+			<% var rating = (Math.round(rating * 2) / 2).toFixed(1) %>
 			<%= rating %>
 			<% for(var i = 0; i< Math.floor(rating); i++){ %>
 				<i class="fa fa-star media-thumbnail__rating" aria-hidden="true"></i>
 				<% if(i == Math.floor(rating)-1 && rating % 1 > 0){ %>
 					<i class="fa fa-star-half-o media-thumbnail__rating" aria-hidden="true"></i>
-					<% console.log(i%1); %>
 				<% } %>
 			<% } %>
-			<% for(var j = 0; j < 4 - i; j++){ %>
+			<% for(var j = 0; j < 5 - Math.ceil(rating); j++){ %>
 				<i class="fa fa-star-o media-thumbnail__rating" aria-hidden="true"></i>
 			<% } %>
 		</div>
