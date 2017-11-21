@@ -8,23 +8,27 @@
       <% include ../partials/header %>
       <div class="container">
         <h1 class="white-text">TV Shows</h1>
-        <form class="" action="/tv-shows" method="get">
-          <label for="">Select a Genre</label>
-          <select class="" name="genre">
-            <option value="">All</option>
-            <% genres.forEach(function(genre) { %>
+        <form class="media-search-form" action="/tv-shows" method="get">
+          <div class="u-inline">
+            <label for="">Select a Genre</label>
+            <select class="" name="genre">
+              <option value="">All</option>
+              <% genres.forEach(function(genre) { %>
                 <option value="<%= genre.id %>">
                   <%= genre.name %>
                 </option>
-            <% }) %>
-          </select>
-          <label for="">Sort by</label>
-          <select class="" name="sort_by">
-            <option value="release_date.gte">Latest</option>
-            <option value="popularity.desc">Most Popular</option>
-            <option value="popularity.asc">Least Popular</option>
-          </select>
-          <input type="submit" name="" value="Search">
+                <% }) %>
+              </select>
+          </div>
+          <div class="u-inline">
+            <label for="">Sort by</label>
+            <select class="" name="sort_by">
+              <option value="release_date.gte">Latest</option>
+              <option value="popularity.desc">Most Popular</option>
+              <option value="popularity.asc">Least Popular</option>
+            </select>
+            <input type="submit" name="" value="Search">
+          </div>
         </form>
       </div>
     </header>
