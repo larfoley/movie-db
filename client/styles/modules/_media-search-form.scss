@@ -1,0 +1,20 @@
+.media-search-form {
+  margin-bottom: 2em;
+  
+  & label {
+    display: block;
+    margin-bottom: .5em;
+  }
+
+  & select {
+    background-color: #1D2730;
+    border: 1px solid white;
+    padding: .35em;
+    color: white;
+    margin-right: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
