@@ -1,31 +1,43 @@
-<div class="media-thumbnail">
-	<img class="media-thumbnail__image" src="<%= img_url %>" alt="">
-	<i class="fa fa-search-plus" aria-hidden="true"></i>
-	<span>View More Info</span>
+<a class="media-thumbnail" href="/media?id=<%= id %>&media_type=<%= media_type%>">
+	<div class="media-thumbnail__image-wrapper">
+		<img class="media-thumbnail__image" src="<%= img_url %>" alt="">
+		<div class="media-thumbnail__overlay">
+			<div class="media-thumbnail__more-info">
+				<h3>View More Info</h3>
+				<i class="fa fa-search-plus fa-3x" aria-hidden="true"></i>
+			</div>
+		</div>
+	</div>
 	<div class="media-thumbnail__info">
 		<h3 class="media-thumbnail__title"><%= title %></h3>
 		<div class="media-thumbnail__year">
 			<%= year_released %>
 		</div>
-		<span>Rating</span>
-		<div>
+		<div class="media-thumbnail__rating">
 			<% var rating = (Math.round(rating * 2) / 2).toFixed(1) %>
-			<%= rating %>
 			<% for(var i = 0; i< Math.floor(rating); i++){ %>
-				<i class="fa fa-star media-thumbnail__rating" aria-hidden="true"></i>
+				<i class="fa fa-star media-thumbnail__star" aria-hidden="true"></i>
 				<% if(i == Math.floor(rating)-1 && rating % 1 > 0){ %>
-					<i class="fa fa-star-half-o media-thumbnail__rating" aria-hidden="true"></i>
+					<i class="fa fa-star-half-o media-thumbnail__star" aria-hidden="true"></i>
 				<% } %>
 			<% } %>
 			<% for(var j = 0; j < 5 - Math.ceil(rating); j++){ %>
-				<i class="fa fa-star-o media-thumbnail__rating" aria-hidden="true"></i>
+				<i class="fa fa-star-o media-thumbnail__star" aria-hidden="true"></i>
 			<% } %>
 		</div>
 		<div>
-			<i class="fa fa-heart-o" aria-hidden="true"></i>
-			<i class="fa fa-plus" aria-hidden="true"></i>
-			<i class="fa fa-share-alt" aria-hidden="true"></i>
-			<i class="fa fa-eye-slash" aria-hidden="true"></i>
+			<div class="circle">
+				<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+			</div>
+			<div class="circle">
+				<i class="icon fa fa-plus" aria-hidden="true"></i>
+			</div>
+			<div class="circle">
+				<i class="icon fa fa-share-alt" aria-hidden="true"></i>
+			</div>
+			<div class="circle">
+				<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
+			</div>
 		</div>
 	</div>
-</div>
+</a>

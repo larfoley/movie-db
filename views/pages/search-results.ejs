@@ -14,9 +14,9 @@
           <% results.forEach(function(media) {%>
 
             <%- include('../partials/media-thumbnail', {
-              medai: "",
-              url: "",
-              img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
+              id: media.id,
+              media_type: "movie",
+              img_url: "https://image.tmdb.org/t/p/w200/" + media.poster_path,
               title: media.title,
               rating: media.vote_average / 2,
               year_released: parseInt(media.release_date)

@@ -1,9 +1,20 @@
 .media-thumbnail {
+  text-decoration: none;
   color: white;
-  width: 300px;
+  font-size: .9em;
   background-color: #1d2733;
-  margin: 1em;
+  margin: 1.5em;
+  margin-left: 0;
   display: inline-block;
+  transition: .2s;
+
+  &:hover &__overlay {
+    opacity: 0.8;
+  }
+
+  &:hover {
+    // transform: scale(1.1);
+  }
 }
 
 .media-thumbnail__title {
@@ -12,9 +23,61 @@
 }
 
 .media-thumbnail__year {
-  margin-bottom: 1em;
+  margin-bottom: .7em;
 }
 
 .media-thumbnail__info {
   padding: 1.5em;
+}
+
+.media-thumbnail__image-wrapper {
+  position: relative;
+  text-align: center;
+}
+
+.media-thumbnail__more-info {
+  position: relative;
+  top: 150px;
+}
+
+.media-thumbnail__image {
+  width: 250px;
+}
+
+
+.media-thumbnail__rating {
+  margin-bottom: 2em;
+}
+
+.media-thumbnail__star {
+  color: $brand-color;
+  font-size: 1.5em;
+}
+
+.media-thumbnail__overlay {
+  position: absolute;
+  transition: .3s;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  opacity: 0;
+}
+
+.circle {
+  display: inline-block;
+  border-radius: 50%;
+  padding: .9em;
+  // background-color: blue;
+  border: 2px solid white;
+  margin-right: 5px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    background-color: $brand-color;
+    border-color: $brand-color;
+    color: white;
+  }
 }
