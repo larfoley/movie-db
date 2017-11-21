@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <header class="site-header">
+      <% include ../partials/header %>
+    </header>
+    <main>
+      <div>
+        <h1><% media.title%></h1>
+      </div>
+      <div>
+        <h2>You May Also Like</h2>
+        <ul>
+        <% if (latestMovies) { %>
+          <% latestMovies.forEach(function (media) { %>
+            <%- include('../partials/media-thumbnail', {
+              img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
+              title: media.title,
+              rating: media.vote_average / 2,
+              year_released: parseInt(media.release_date)
+            }) %>
+          <% }) %>
+        <% } %>
+      </ul>
+      </div>
+    </main>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>
