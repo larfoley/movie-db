@@ -16,6 +16,7 @@ var login = require('./routes/login');
 var register = require('./routes/register');
 var search = require('./routes/search');
 var tvShows = require('./routes/tv-shows');
+var media = require('./routes/media');
 
 var app = express();
 
@@ -51,7 +52,8 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/register', register);
 app.use('/search', search);
-app.use('/tv-shows', tvShows)
+app.use('/tv-shows', tvShows);
+app.use('/media', media);
 
 app.use(function(req, res, next) {
   var err = new Error('Page Not Found');
