@@ -10,7 +10,7 @@
       <main class="container">
         <section>
           <h2 class="sectiontitle">Popular</h2>
-            <ul>
+            <ul class="u-clearfix">
             <% if (popularMovies) { %>
               <% popularMovies.forEach(function (media) { %>
                 <%- include('../partials/media-thumbnail', {
@@ -27,7 +27,7 @@
         </section>
         <section>
           <h2 class="sectiontitle">Lastest</h2>
-          <ul>
+          <ul class="u-clearfix">
           <% if (latestMovies) { %>
             <% latestMovies.forEach(function (media) { %>
               <%- include('../partials/media-thumbnail', {
