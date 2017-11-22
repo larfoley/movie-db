@@ -9,6 +9,7 @@ router.get('/', function (req, res, next) {
   var id = req.query.id;
   var mediaType = req.query.media_type;
   var media, relatedMedia;
+  console.log("MEDIA TYPE", mediaType);
 
   rp({
       method: 'GET',

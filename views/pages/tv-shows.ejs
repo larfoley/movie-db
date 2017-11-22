@@ -37,7 +37,7 @@
         <% results.forEach(function (media) { %>
           <%- include('../partials/media-thumbnail', {
             id: media.id,
-            media_type: "tv-show",
+            media_type: "tv",
             img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
             title: media.title,
             rating: media.vote_average / 2,

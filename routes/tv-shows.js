@@ -6,7 +6,7 @@ var rp = require('request-promise');
 
 
 router.get('/', function(req, res, next) {
-  var genres, results;
+  var genres, tvShows;
 
   rp({
     method: 'GET',
@@ -18,11 +18,11 @@ router.get('/', function(req, res, next) {
     body: '{}'})
 
     .then(function (response) {
-      // Get genres
+
       genres = JSON.parse(response).genres;
 
       return rp({ method: 'GET',
-      url: 'https://api.themoviedb.org/3/discover/movie',
+      url: 'https://api.themoviedb.org/3/discover/tv',
       qs: {
         language: 'en-US',
         api_key: config.api_key,
@@ -35,14 +35,15 @@ router.get('/', function(req, res, next) {
     })
 
     .then(function (response) {
-      var results = JSON.parse(response).results;
+      var tvShows = JSON.parse(response).results;
+      console.log(tvShows[0]);
       res.render('pages/tv-shows', {
         activeLink: "login",
         requestedGenre: genres instanceof Array ?
           genres.filter(genre => genre.id == req.query.genre).name : "",
         requestedFilter: req.query.sort_by,
         genres: genres,
-        results: results
+        results: tvShows
       });
     })
 
