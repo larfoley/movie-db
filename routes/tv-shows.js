@@ -6,6 +6,7 @@ var rp = require('request-promise');
 
 
 router.get('/', function(req, res, next) {
+  console.log(req.user);
   var genres, tvShows;
 
   rp({
@@ -39,6 +40,7 @@ router.get('/', function(req, res, next) {
       console.log(tvShows[0]);
       res.render('pages/tv-shows', {
         activeLink: "login",
+        isLoggedIn: !!req.user,
         requestedGenre: genres instanceof Array ?
           genres.filter(genre => genre.id == req.query.genre).name : "",
         requestedFilter: req.query.sort_by,

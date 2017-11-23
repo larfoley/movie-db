@@ -26,18 +26,53 @@
 			<% } %>
 		</div>
 		<div>
-			<div class="circle">
-				<i class="icon fa fa-heart-o" aria-hidden="true"></i>
-			</div>
-			<div class="circle">
-				<i class="icon fa fa-plus" aria-hidden="true"></i>
-			</div>
-			<div class="circle">
-				<i class="icon fa fa-share-alt" aria-hidden="true"></i>
-			</div>
-			<div class="circle">
-				<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
-			</div>
+			<% if (locals.isLoggedIn) { %>
+				<form class="u-inline" action="/favourite/add" method="get">
+					<div class="circle">
+						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+						<input type="hidden" name="media_type" value="<%= media_type + 's' %>">
+						<input type="hidden" name="media_id" value="<%= id %>">
+						<input class="" type="submit" name="" value="">
+					</div>
+				</form>
+				<form class="u-inline" action="/favourite/add" method="get">
+					<div class="circle">
+						<i class="icon fa fa-plus" aria-hidden="true"></i>
+						<input type="hidden" name="media_type" value="<%= media_type + 's' %>">
+						<input type="hidden" name="media_id" value="<%= id %>">
+						<input class="u-hide" type="submit" name="" value="">
+					</div>
+				</form>
+				<form class="u-inline" action="/favourite/add" method="get">
+					<div class="circle">
+						<i class="icon fa fa-share-alt" aria-hidden="true"></i>
+						<input type="hidden" name="media_type" value="<%= media_type + 's' %>">
+						<input type="hidden" name="media_id" value="<%= id %>">
+						<input class="u-hide" type="submit" name="" value="">
+					</div>
+				</form>
+				<form class="u-inline" action="/favourite/add" method="get">
+					<div class="circle">
+						<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
+						<input type="hidden" name="media_type" value="<%= media_type + 's' %>">
+						<input type="hidden" name="media_id" value="<%= id %>">
+						<input class="u-hide" type="submit" name="" value="">
+					</div>
+				</form>
+			<% } else { %>
+				<div class="circle">
+					<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+				</div>
+				<div class="circle">
+					<i class="icon fa fa-plus" aria-hidden="true"></i>
+				</div>
+				<div class="circle">
+					<i class="icon fa fa-share-alt" aria-hidden="true"></i>
+				</div>
+				<div class="circle">
+					<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
+				</div>
+			<% } %>
 		</div>
 	</div>
 </a>
