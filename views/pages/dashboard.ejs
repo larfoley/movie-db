@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <header class="site-header">
+      <% include ../partials/header %>
+    </header>
+      <main class="container">
+        <section>
+          <h2 class="sectiontitle">Favourite Movies</h2>
+          <ul class="u-clearfix">
+          <% if (favouriteMovies) { %>
+            <% favouriteMovies.forEach(function (media) { %>
+              <%- include('../partials/media-thumbnail', {
+                media_type: "movie",
+                id: media.id,
+                isLoggedIn: true,
+                img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
+                title: media.title,
+                rating: media.vote_average / 2,
+                year_released: parseInt(media.release_date)
+              }) %>
+            <% }) %>
+          <% } %>
+          </ul>
+        </section>
+      </main>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>
