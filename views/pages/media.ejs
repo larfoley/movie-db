@@ -1,0 +1,119 @@
+<!--
+boilerplate for ejs template
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ../partials/head %>
+    <style>
+      .backdrop-img {
+        height: 500px;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      .media-thumbnail__info {
+        width: 50%;
+        float: left;
+      }
+
+      .media-overview {
+        width: 50%;
+        float: left;
+        padding: 24px;
+      }
+
+      .media-info {
+        margin-bottom: 225px;
+      }
+
+      .similar-movies {
+        margin: auto;
+        width: 95%;
+      }
+
+      .similar-movies__thumbnails {
+        min-width: 25%;
+        float: left;
+      }
+
+      .similar-movies__title {
+        margin-bottom: 10px;
+      }
+
+    </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <% include ../partials/header %>
+  </header>
+  <main>
+    <div class="backdrop-img" style="background-image:url('https://image.tmdb.org/t/p/original<%= media.backdrop_path %>')"></div>
+    <div class="media-info">
+      <div class="media-thumbnail__info">
+        <h3 class="media-thumbnail__title">
+          <%= media.title %>
+        </h3>
+        <div class="media-thumbnail__year">
+          <%= parseInt(media.release_date) %>
+        </div>
+        <div class="media-thumbnail__rating">
+          <% var rating = (Math.round((media.vote_average/2) * 2) / 2).toFixed(1) %>
+            <% for(var i = 0; i< Math.floor(media.vote_average/2); i++){ %>
+              <i class="fa fa-star media-thumbnail__star" aria-hidden="true"></i>
+              <% if(i == Math.floor(media.vote_average/2)-1 && (media.vote_average/2) % 1 > 0){ %>
+                <i class="fa fa-star-half-o media-thumbnail__star" aria-hidden="true"></i>
+                <% } %>
+                  <% } %>
+                    <% for(var j = 0; j < 5 - Math.ceil(media.vote_average/2); j++){ %>
+                      <i class="fa fa-star-o media-thumbnail__star" aria-hidden="true"></i>
+                      <% } %>
+        </div>
+        <div>
+          <div class="circle">
+            <i class="icon fa fa-heart-o" aria-hidden="true"></i>
+          </div>
+          <div class="circle">
+            <i class="icon fa fa-plus" aria-hidden="true"></i>
+          </div>
+          <div class="circle">
+            <i class="icon fa fa-share-alt" aria-hidden="true"></i>
+          </div>
+          <div class="circle">
+            <i class="icon fa fa-eye-slash" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      <div class="media-overview">
+        <h4>Overview</h4>
+        <p>
+          <%= media.overview %>
+        </p>
+      </div>
+    </div>
+    <div class="similar-movies">
+      <h3>Similar
+        <%= mediaType === 'movie' ? 'Movies' : 'TV Shows' %>
+      </h3>
+      <% for(var i = 0; i < 8; i++){ %>
+        <div class="similar-movies__thumbnails">
+          <h4 class="similar-movies__title">
+            <%= relatedMovies[i].title %>
+          </h4>
+          <a href="media?id=<%=relatedMovies[i].id%>&media_type=<%=mediaType%>">
+            <img src="https://image.tmdb.org/t/p/w154<%= relatedMovies[i].poster_path %>" alt="">
+          </a>
+        </div>
+        <% } %>
+    </div>
+  </main>
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+</body>
+
+</html>
