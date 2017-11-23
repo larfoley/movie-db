@@ -30,18 +30,21 @@ boilerplate for ejs template
         margin-bottom: 225px;
       }
 
-      .similar-movies {
+      .thumbnails {
         margin: auto;
         width: 95%;
+        margin-bottom: 24px;
       }
 
-      .similar-movies__thumbnails {
-        min-width: 25%;
+      .thumbnails__images {
+        min-width: 20%;
         float: left;
+        padding-left: 24px;
       }
 
-      .similar-movies__title {
+      .thumbnails__title {
         margin-bottom: 10px;
+        min-width: 20%;
       }
 
     </style>
@@ -65,9 +68,9 @@ boilerplate for ejs template
           <% var rating = (Math.round((media.vote_average/2) * 2) / 2).toFixed(1) %>
             <% for(var i = 0; i< Math.floor(media.vote_average/2); i++){ %>
               <i class="fa fa-star media-thumbnail__star" aria-hidden="true"></i>
-              <% if(i == Math.floor(media.vote_average/2)-1 && (media.vote_average/2) % 1 > 0){ %>
-                <i class="fa fa-star-half-o media-thumbnail__star" aria-hidden="true"></i>
-                <% } %>
+              <% } %>
+                <% if((media.vote_average/2) % 1 > 0){ %>
+                  <i class="fa fa-star-half-o media-thumbnail__star" aria-hidden="true"></i>
                   <% } %>
                     <% for(var j = 0; j < 5 - Math.ceil(media.vote_average/2); j++){ %>
                       <i class="fa fa-star-o media-thumbnail__star" aria-hidden="true"></i>
@@ -95,17 +98,28 @@ boilerplate for ejs template
         </p>
       </div>
     </div>
-    <div class="similar-movies">
+    <div class="thumbnails">
+      <h3>Cast</h3>
+      <% for(var i = 0; i < 10; i++){ %>
+        <div class="thumbnails__images">
+          <h4 class="thumbnails__title">
+            <%= cast[i].name %>
+          </h4>
+          <img src="https://image.tmdb.org/t/p/w154<%= cast[i].profile_path %>" alt="">
+        </div>
+        <% } %>
+    </div>
+    <div class="thumbnails">
       <h3>Similar
         <%= mediaType === 'movie' ? 'Movies' : 'TV Shows' %>
       </h3>
-      <% for(var i = 0; i < 8; i++){ %>
-        <div class="similar-movies__thumbnails">
-          <h4 class="similar-movies__title">
-            <%= relatedMovies[i].title %>
+      <% for(var i = 0; i < 10; i++){ %>
+        <div class="thumbnails__images">
+          <h4 class="thumbnails__title">
+            <%= relatedMedia[i].title %>
           </h4>
-          <a href="media?id=<%=relatedMovies[i].id%>&media_type=<%=mediaType%>">
-            <img src="https://image.tmdb.org/t/p/w154<%= relatedMovies[i].poster_path %>" alt="">
+          <a href="media?id=<%=relatedMedia[i].id%>&media_type=<%=mediaType%>">
+            <img src="https://image.tmdb.org/t/p/w154<%= relatedMedia[i].poster_path %>" alt="">
           </a>
         </div>
         <% } %>
