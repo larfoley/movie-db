@@ -1,7 +1,6 @@
 var config = require('../config');
 var express = require('express');
 var router = express.Router();
-var https = require('https');
 var request = require("request");
 var rp = require('request-promise');
 
