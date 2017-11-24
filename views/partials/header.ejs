@@ -21,18 +21,27 @@
           TV Shows
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link <%= locals.activeLink === 'login'? 'active' : null %>" href="/login">
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
-          Login
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link <%= locals.activeLink === 'register'? 'active' : null %>" href="/register">
-          <i class="fa fa-sign-in" aria-hidden="true"></i>
-          Register
-        </a>
-      </li>
+      <% if (locals.isLoggedIn) { %>
+        <li class="nav-item">
+          <a class="nav-link <%= locals.activeLink === 'dashboard'? 'active' : null %>" href="/dashboard">
+            <i class="fa fa-user" aria-hidden="true"></i>
+            Dashboard
+          </a>
+        </li>
+      <% } else { %>
+        <li class="nav-item">
+          <a class="nav-link <%= locals.activeLink === 'login'? 'active' : null %>" href="/login">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Login
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <%= locals.activeLink === 'register'? 'active' : null %>" href="/register">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            Register
+          </a>
+        </li>
+      <% } %>
     </ul>
   </div>
 </nav>

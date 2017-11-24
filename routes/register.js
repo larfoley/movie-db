@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
     }
 
     if (user) {
-      // User alread exists
+      // User already exists
       return res.render('pages/register', {
         activeLink: "register",
         flash: {
@@ -31,10 +31,35 @@ router.post('/', function(req, res, next) {
       });
     }
 
+    if (
+        req.body.username.trim() === "" ||
+        req.body.email.trim() === "" ||
+        req.body.password.trim() === ""
+      ) {
+      return res.render('pages/register', {
+        activeLink: "register",
+        flash: {
+          type: "error",
+          message: "required fields are missing"
+        }
+      });
+    }
+
+    if (req.body.password !== req.body.confirm_password) {
+      return res.render('pages/register', {
+        activeLink: "register",
+        flash: {
+          type: "error",
+          message: "Passwords do not match"
+        }
+      });
+    }
+
     new User({
-      name: req.body.name,
       email: req.body.email,
-      password: req.body.password
+      username: req.body.username,
+      password: req.body.password,
+      confirm_password: req.body.confirm_password,
     }).save(function(err) {
       if (err) {
         return next(err)

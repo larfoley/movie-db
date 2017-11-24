@@ -1,13 +1,13 @@
 .media-search-form {
   margin-bottom: 2em;
-  
+
   & label {
     display: block;
     margin-bottom: .5em;
   }
 
   & select {
-    background-color: #1D2730;
+    background-color: $body-bg-color;
     border: 1px solid white;
     padding: .35em;
     color: white;
