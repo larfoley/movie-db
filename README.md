@@ -64,7 +64,7 @@ To include a template ejs provides a `include` function. The funciton takes two 
  <h1>Hello World</h1>
 </header>
 
- <%- include('/views/paritals/user', {usernmae: "Bob"}) &>
+ <%- include('/views/paritals/user', {usernmae: "Bob"}) %>
 
 ```
 When the above hello world file gets compiled it will look like this:
