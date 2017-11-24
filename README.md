@@ -47,7 +47,7 @@ Noctice the openeing ejs tag `<%=` above has an equals sign at the end, this tel
 Note that the above code first checks to see if there is a variable called `user`. If you try output a variable that ejs cannot access it will throw an error.
 
 ### Including Tempaltes
-To include a template ejs provides a `include` function. The funciton takes two paramaters, the first is the path to the template and the second is an object which contains all of the data that the template can use.
+To include a template ejs provides an `include` function. The funciton takes two paramaters, the first is the path to the template and the second is an object which contains all of the data that the template can use.
 
 ```html
 <!-- user.ejs -->
@@ -56,8 +56,8 @@ To include a template ejs provides a `include` function. The funciton takes two 
   <h3> Name: <%= username %> </h3>
  </div>
  
+```
 ```html
-
 <!-- hello-world.ejs -->
 
 <header>
@@ -81,9 +81,9 @@ When the above hello world file gets compiled it will look like this:
 ```
 
 ## Creating Routes
-First create you wil have to create your route file inside the `/routes/` directory.
+All routes will be create insied the `/routes/` directory.
 
-Name the file after the route, so for example, if you created a file called `/routes/example.js` you would then run following code:
+When creating a route, name the file after the route you are making `/routes/example.js`. After creating your route file, run following code:
 
 ```javascript
 // file name: /routes/example.js
