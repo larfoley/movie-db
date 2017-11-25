@@ -6,12 +6,27 @@
     margin-bottom: .5em;
   }
 
+  & select, & input[type="submit"] {
+    height: 40px;
+    min-width: 190px;
+    padding: .35em;
+  }
+
   & select {
     background-color: $body-bg-color;
     border: 1px solid white;
-    padding: .35em;
     color: white;
     margin-right: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  & input[type="submit"] {
+    background-color: $brand-color;
+    color: white;
+    border: 1px solid $brand-color;
 
     &:hover {
       cursor: pointer;
