@@ -7,12 +7,7 @@ var rp = require('request-promise');
 router.get('/', function (req, res, next) {
   var id = req.query.id;
   var mediaType = req.query.media_type;
-<<<<<<< HEAD
   var media, relatedMedia, cast;
-=======
-  var media, relatedMedia;
-  console.log("MEDIA TYPE", mediaType);
->>>>>>> fb025bb1d3a25ceb83355886e939ffb369760d27
 
   rp({
       method: 'GET',
@@ -50,6 +45,7 @@ router.get('/', function (req, res, next) {
       cast = JSON.parse(response).cast;
       res.render('pages/media', {
         mediaType: mediaType,
+        isLoggedIn: !!req.user,
         media: media,
         relatedMedia: relatedMedia,
         cast: cast

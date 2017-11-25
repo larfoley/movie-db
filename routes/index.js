@@ -41,6 +41,7 @@ router.get('/', function(req, res, next) {
     .then(function (response) {
       // Get latestMovies
       latestMovies = JSON.parse(response).results;
+
       res.render('pages/index', {
         activeLink: "home",
         isLoggedIn: !!req.user,

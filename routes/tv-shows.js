@@ -37,13 +37,40 @@ router.get('/', function(req, res, next) {
 
     .then(function (response) {
       var tvShows = JSON.parse(response).results;
-      console.log(tvShows[0]);
+
       res.render('pages/tv-shows', {
-        activeLink: "login",
+        activeLink: "tv-shows",
         isLoggedIn: !!req.user,
-        requestedGenre: genres instanceof Array ?
-          genres.filter(genre => genre.id == req.query.genre).name : "",
-        requestedFilter: req.query.sort_by,
+        requestedGenre: (function() {
+          if (genres instanceof Array) {
+            if (genres.length > 0) {
+
+              // var genre = genres.filter(genre => genre.id == req.query.genre);
+              //
+              // console.log("ge", genre);
+            }
+          }
+          return "";
+        }()),
+        requestedFilter: (function() {
+          var filter = "";
+
+          switch (req.query.sort_by) {
+            case "release_date.gte":
+              filter = "Latest"
+              break;
+            case "popularity.desc":
+              filter = "Most Popular"
+              break;
+            case "popularity.asc":
+              filter = "Least Popular"
+              break;
+            default:
+          }
+
+          return filter;
+
+        }()),
         genres: genres,
         results: tvShows
       });
