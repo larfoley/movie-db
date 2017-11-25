@@ -7,8 +7,7 @@ var rp = require('request-promise');
 router.get('/', function (req, res, next) {
   var id = req.query.id;
   var mediaType = req.query.media_type;
-  var media, relatedMedia;
-  console.log("MEDIA TYPE", mediaType);
+  var media, relatedMedia, cast;
 
   rp({
       method: 'GET',
@@ -19,7 +18,6 @@ router.get('/', function (req, res, next) {
       body: '{}'
     })
     .then(function (response) {
-      // Get selectedMovie
       media = JSON.parse(response);
       return rp({
         method: 'GET',
@@ -33,12 +31,24 @@ router.get('/', function (req, res, next) {
       })
     })
     .then(function (response) {
-      // Get latestMovies
       relatedMedia = JSON.parse(response).results;
+      return rp({
+        method: 'GET',
+        url: 'https://api.themoviedb.org/3/' + mediaType + '/' + id + '/credits',
+        qs: {
+          api_key: config.api_key,
+        },
+        body: '{}'
+      })
+    })
+    .then(function (response) {
+      cast = JSON.parse(response).cast;
       res.render('pages/media', {
         mediaType: mediaType,
+        isLoggedIn: !!req.user,
         media: media,
-        relatedMovies: relatedMedia
+        relatedMedia: relatedMedia,
+        cast: cast
       });
     })
     .catch(function (err) {

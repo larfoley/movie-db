@@ -6,45 +6,59 @@
   <body>
     <header class="site-header">
       <% include ../partials/header %>
-      <div class="container">
-        <h1 class="white-text">TV Shows</h1>
-        <form class="media-search-form" action="/tv-shows" method="get">
-          <div class="u-inline">
-            <label for="">Select a Genre</label>
-            <select class="" name="genre">
-              <option value="">All</option>
-              <% genres.forEach(function(genre) { %>
-                <option value="<%= genre.id %>">
-                  <%= genre.name %>
-                </option>
-                <% }) %>
-              </select>
+
+      <div class="page-header">
+        <div class="container">
+          <h1 class="white-text">TV Shows</h1>
+          <form class="media-search-form" action="/tv-shows" method="get">
+            <div class="u-inline">
+              <label for="">Select a Genre</label>
+              <select class="" name="genre">
+                <option value="">All</option>
+                <% genres.forEach(function(genre) { %>
+                  <option value="<%= genre.id %>" <%= genre.name %> >
+                    <%= genre.name %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="u-inline">
+                <label for="">Sort by</label>
+                <select class="" name="sort_by">
+                  <option value="release_date.gte">Latest</option>
+                  <option value="popularity.desc" selected>Most Popular</option>
+                  <option value="popularity.asc">Least Popular</option>
+                </select>
+                <input type="submit" name="" value="Search">
+              </div>
+            </form>
           </div>
-          <div class="u-inline">
-            <label for="">Sort by</label>
-            <select class="" name="sort_by">
-              <option value="release_date.gte">Latest</option>
-              <option value="popularity.desc">Most Popular</option>
-              <option value="popularity.asc">Least Popular</option>
-            </select>
-            <input type="submit" name="" value="Search">
-          </div>
-        </form>
       </div>
     </header>
+
     <main class="container">
       <% if (results) { %>
-        <% results.forEach(function (media) { %>
-          <%- include('../partials/media-thumbnail', {
-            id: media.id,
-            media_type: "tv",
-            img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
-            title: media.title,
-            rating: media.vote_average / 2,
-            year_released: parseInt(media.release_date)
-          }) %>
-        <% }) %>
-      <% } %>
+        <section class="section">
+
+          <% if (locals.requestedGenre) { %>
+            <h2 class="section__title"><%= requestedFilter + " " + requestedGenre %></h2>
+          <% } %>
+          <ul class="u-clearfix">
+            <% results.forEach(function (media) { %>
+
+              <% if (media) { console.log(media)%>
+
+                <%- include('../partials/media-thumbnail', {
+                  media: media,
+                  mediaType: "tv"
+                }) %>
+
+              <% } %>
+
+            <% }) %>
+          <% } %>
+        </ul>
+      </section>
     </main>
     <footer>
       <% include ../partials/footer %>

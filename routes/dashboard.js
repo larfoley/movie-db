@@ -8,16 +8,14 @@ router.get('/', function(req, res, next) {
   if (req.user) {
     // Get favourite movies
     var query = User.findOne({ 'username': req.user.username });
-    console.log(1);
+
     var x = query.exec(function(err, user) {
-      console.log(2, err);
       if (err) {
         return next(error);
       }
 
     })
 
-    console.log(x);
     var movies = [];
     var movieIDS = req.user.favourite.movies.map(function(movie) {
       return movie.id;
