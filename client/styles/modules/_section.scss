@@ -1,0 +1,17 @@
+.section {
+  margin: 5em 0;
+}
+
+.section__title {
+  margin-top: 0;
+  margin-bottom: 18px;
+
+  &:after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 6px;
+    background-color: crimson;
+    margin-top: 4px;
+  }
+}
