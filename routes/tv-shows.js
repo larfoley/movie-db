@@ -42,15 +42,15 @@ router.get('/', function(req, res, next) {
         activeLink: "tv-shows",
         isLoggedIn: !!req.user,
         requestedGenre: (function() {
+          var g = {id: req.query.genre}
           if (genres instanceof Array) {
-            if (genres.length > 0) {
-
-              // var genre = genres.filter(genre => genre.id == req.query.genre);
-              //
-              // console.log("ge", genre);
+            var filtered = genres.filter(genre => genre.id == g.id);
+            if (filtered.length > 0) {
+              g.name = filtered[0].name;
+              return g;
             }
           }
-          return "";
+          return g;
         }()),
         requestedFilter: (function() {
           var filter = "";

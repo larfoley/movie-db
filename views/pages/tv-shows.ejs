@@ -7,17 +7,20 @@
     <header class="site-header">
       <% include ../partials/header %>
 
-      <div class="page-header">
+      <section class="section">
         <div class="container">
-          <h1 class="white-text">TV Shows</h1>
+          <h1>TV Shows</h1>
           <form class="media-search-form" action="/tv-shows" method="get">
             <div class="u-inline">
               <label for="">Select a Genre</label>
               <select class="" name="genre">
                 <option value="">All</option>
                 <% genres.forEach(function(genre) { %>
-                  <option value="<%= genre.id %>" <%= genre.name %> >
-                    <%= genre.name %>
+                  <option
+                    value="<%= genre.id %>"
+                    <%= requestedGenre.id == genre.id ? 'selected' : null %>
+                  >
+                  <%= genre.name %>
                   </option>
                   <% }) %>
                 </select>
@@ -33,7 +36,7 @@
               </div>
             </form>
           </div>
-      </div>
+      </section>
     </header>
 
     <main class="container">
@@ -41,7 +44,9 @@
         <section class="section">
 
           <% if (locals.requestedGenre) { %>
-            <h2 class="section__title"><%= requestedFilter + " " + requestedGenre %></h2>
+            <h2 class="section__title">
+              <%= requestedFilter + " " + requestedGenre.name %>
+            </h2>
           <% } %>
           <ul class="u-clearfix">
             <% results.forEach(function (media) { %>
