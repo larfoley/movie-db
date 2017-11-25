@@ -8,39 +8,28 @@
       <% include ../partials/header %>
     </header>
       <main class="container">
-        <section>
-          <h2 class="sectiontitle">Popular</h2>
+        <section class="section">
+          <h2 class="section__title">Popular</h2>
             <ul class="u-clearfix">
             <% if (popularMovies) { %>
-              <% popularMovies.forEach(function (media) { %>
+                
+              <% popularMovies.filter((m,i) => i < 10).forEach( media => { %>
+
                 <%- include('../partials/media-thumbnail', {
-                  isLoggedIn: isLoggedIn,
-                  id: media.id,
-                  media_type: "movie",
-                  img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
-                  title: media.title,
-                  rating: media.vote_average / 2,
-                  year_released: parseInt(media.release_date)
+                  media: media,
+                  mediaType: "movie",
                 }) %>
+
               <% }) %>
+
             <% } %>
             </ul>
         </section>
-        <section>
-          <h2 class="sectiontitle">Lastest</h2>
+
+        <section class="section">
+          <h2 class="section__title">Lastest</h2>
           <ul class="u-clearfix">
-          <% if (latestMovies) { %>
-            <% latestMovies.forEach(function (media) { %>
-              <%- include('../partials/media-thumbnail', {
-                media_type: "movie",
-                id: media.id,
-                img_url: "https://image.tmdb.org/t/p/w500/" + media.poster_path,
-                title: media.title,
-                rating: media.vote_average / 2,
-                year_released: parseInt(media.release_date)
-              }) %>
-            <% }) %>
-          <% } %>
+
           </ul>
         </section>
       </main>

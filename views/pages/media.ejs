@@ -1,152 +1,101 @@
-<<<<<<< HEAD
-<!--
-boilerplate for ejs template
--->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <% include ../partials/head %>
-    <style>
-      .backdrop-img {
-        height: 500px;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-
-      .media-thumbnail__info {
-        width: 50%;
-        float: left;
-      }
-
-      .media-overview {
-        width: 50%;
-        float: left;
-        padding: 24px;
-      }
-
-      .media-info {
-        margin-bottom: 225px;
-      }
-
-      .thumbnails {
-        margin: auto;
-        width: 95%;
-        margin-bottom: 24px;
-      }
-
-      .thumbnails__images {
-        min-width: 20%;
-        float: left;
-        padding-left: 24px;
-      }
-
-      .thumbnails__title {
-        margin-bottom: 10px;
-        min-width: 20%;
-      }
-
-    </style>
 </head>
 
 <body>
+  <style media="screen">
+  </style>
   <header class="site-header">
     <% include ../partials/header %>
+
+    <!-- MEDIA HEADER -->
+    <div
+    class="media-header"
+    style="background-image:url('https://image.tmdb.org/t/p/original<%= media.backdrop_path %>')">
+      <div class="media-info">
+        <div class="container">
+          <div class="grid">
+            <div class="grid__col grid__col--1-of-2">
+              <h1><%= media.title || media.name %></h1>
+              <div class="media-thumbnail__rating">
+          			<% var rating = (Math.round((media.vote_average / 2) * 2) / 2).toFixed(1) %>
+          			<% for(var i = 0; i< Math.floor(rating); i++){ %>
+          				<i class="fa fa-star media-thumbnail__star" aria-hidden="true"></i>
+          				<% if(i == Math.floor(rating)-1 && rating % 1 > 0){ %>
+          					<i class="fa fa-star-half-o media-thumbnail__star" aria-hidden="true"></i>
+          				<% } %>
+          			<% } %>
+          			<% for(var j = 0; j < 5 - Math.ceil(rating); j++){ %>
+          				<i class="fa fa-star-o media-thumbnail__star" aria-hidden="true"></i>
+          			<% } %>
+          		</div>
+
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa fa-heart fa-stack-1x"></i>
+              </span>
+
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa fa-plus fa-stack-1x"></i>
+              </span>
+
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle-thin fa-stack-2x"></i>
+                <i class="fa fa-eye fa-stack-1x"></i>
+              </span>
+            </div>
+            <div class="grid__col grid__col--1-of-2">
+              <h2>Overview</h2>
+              <p>
+                <%= media.overview %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
+
   <main>
-    <div class="backdrop-img" style="background-image:url('https://image.tmdb.org/t/p/original<%= media.backdrop_path %>')"></div>
-    <div class="media-info">
-      <div class="media-thumbnail__info">
-        <h3 class="media-thumbnail__title">
-          <%= media.title %>
-        </h3>
-        <div class="media-thumbnail__year">
-          <%= parseInt(media.release_date) %>
-        </div>
-        <div class="media-thumbnail__rating">
-          <% var rating = (Math.round((media.vote_average/2) * 2) / 2).toFixed(1) %>
-            <% for(var i = 0; i< Math.floor(media.vote_average/2); i++){ %>
-              <i class="fa fa-star media-thumbnail__star" aria-hidden="true"></i>
-              <% } %>
-                <% if((media.vote_average/2) % 1 > 0){ %>
-                  <i class="fa fa-star-half-o media-thumbnail__star" aria-hidden="true"></i>
-                  <% } %>
-                    <% for(var j = 0; j < 5 - Math.ceil(media.vote_average/2); j++){ %>
-                      <i class="fa fa-star-o media-thumbnail__star" aria-hidden="true"></i>
-                      <% } %>
-        </div>
-        <div>
-          <div class="circle">
-            <i class="icon fa fa-heart-o" aria-hidden="true"></i>
-          </div>
-          <div class="circle">
-            <i class="icon fa fa-plus" aria-hidden="true"></i>
-          </div>
-          <div class="circle">
-            <i class="icon fa fa-share-alt" aria-hidden="true"></i>
-          </div>
-          <div class="circle">
-            <i class="icon fa fa-eye-slash" aria-hidden="true"></i>
-          </div>
-        </div>
-      </div>
-      <div class="media-overview">
-        <h4>Overview</h4>
-        <p>
-          <%= media.overview %>
-        </p>
-      </div>
-    </div>
-    <div class="thumbnails">
-      <h3>Cast</h3>
-      <% for(var i = 0; i < 10; i++){ %>
-        <div class="thumbnails__images">
-          <h4 class="thumbnails__title">
-            <%= cast[i].name %>
-          </h4>
-          <img src="https://image.tmdb.org/t/p/w154<%= cast[i].profile_path %>" alt="">
-        </div>
+    <div class="container">
+
+      <!-- CAST SECTION  -->
+      <section class="section">
+        <h2 class="section__title">Featrued Cast</h2>
+        <% for (var i = 0; i < 5; i++) { %>
+
+          <% if (cast[i]) { %>
+
+            <!-- inlude cast-member template here -->
+
+          <% } %>
+
         <% } %>
-    </div>
-    <div class="thumbnails">
-      <h3>Similar
-        <%= mediaType === 'movie' ? 'Movies' : 'TV Shows' %>
-      </h3>
-      <% for(var i = 0; i < 10; i++){ %>
-        <div class="thumbnails__images">
-          <h4 class="thumbnails__title">
-            <%= relatedMedia[i].title %>
-          </h4>
-          <a href="media?id=<%=relatedMedia[i].id%>&media_type=<%=mediaType%>">
-            <img src="https://image.tmdb.org/t/p/w154<%= relatedMedia[i].poster_path %>" alt="">
-          </a>
-        </div>
+      </section>
+
+      <!-- SIMILAR MEDIA SECTION  -->
+      <section class="section">
+        <h2 class="section__title">Similar <%= mediaType === 'movie' ? 'Movies' : 'TV Shows' %></h2>
+        <% for(var i = 0; i < 5; i++){ %>
+
+          <% if (relatedMedia[i]) { %>
+
+            <%- include('../partials/media-thumbnail.ejs', {
+              media: relatedMedia[i]
+            })%>
+
+          <% }%>
+
         <% } %>
+      </section>
+
     </div>
   </main>
   <footer>
     <% include ../partials/footer %>
   </footer>
 </body>
-
-=======
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <% include ../partials/head %>
-  </head>
-  <body>
-    <header class="site-header">
-      <% include ../partials/header %>
-    </header>
-    <main>
-      
-    </main>
-    <footer>
-      <% include ../partials/footer %>
-    </footer>
-  </body>
->>>>>>> fb025bb1d3a25ceb83355886e939ffb369760d27
-</html>

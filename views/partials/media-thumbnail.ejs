@@ -1,20 +1,31 @@
-<a class="media-thumbnail" href="/media?id=<%= id %>&media_type=<%= media_type%>">
+<div class="media-thumbnail">
 	<div class="media-thumbnail__image-wrapper">
-		<img class="media-thumbnail__image" src="<%= img_url %>" alt="">
-		<div class="media-thumbnail__overlay">
-			<div class="media-thumbnail__more-info">
-				<h3>View More Info</h3>
-				<i class="fa fa-search-plus fa-3x" aria-hidden="true"></i>
+		<a href="/media?id=<%= media.id %>&media_type=<%= mediaType %>">
+			<img width="500"
+				class="media-thumbnail__image"
+				src="<%= media.poster_path ?
+					'https://image.tmdb.org/t/p/w500'+ media.poster_path :
+					'http://via.placeholder.com/500x735' %>"
+				alt="<%= media.title %>"
+			>
+
+			<div class="media-thumbnail__overlay">
+				<div class="media-thumbnail__more-info">
+					<h3>View More Info</h3>
+					<i class="fa fa-search-plus fa-3x" aria-hidden="true"></i>
+				</div>
 			</div>
-		</div>
+		</a>
 	</div>
 	<div class="media-thumbnail__info">
-		<h3 class="media-thumbnail__title"><%= title %></h3>
-		<div class="media-thumbnail__year">
-			<%= year_released %>
-		</div>
+		<h3 class="media-thumbnail__title"><%= media.title || media.name %></h3>
+		<% if (mediaType === "movie") {%>
+			<div class="media-thumbnail__year">
+				<%= media.year_released %>
+			</div>
+		<% } %>
 		<div class="media-thumbnail__rating">
-			<% var rating = (Math.round(rating * 2) / 2).toFixed(1) %>
+			<% var rating = (Math.round((media.vote_average / 2) * 2) / 2).toFixed(1) %>
 			<% for(var i = 0; i< Math.floor(rating); i++){ %>
 				<i class="fa fa-star media-thumbnail__star" aria-hidden="true"></i>
 				<% if(i == Math.floor(rating)-1 && rating % 1 > 0){ %>
@@ -27,52 +38,38 @@
 		</div>
 		<div>
 			<% if (locals.isLoggedIn) { %>
-				<form class="u-inline" action="/favourite/add" method="get">
-					<div class="circle">
-						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
-						<input type="hidden" name="media_type" value="<%= media_type + 's' %>">
-						<input type="hidden" name="media_id" value="<%= id %>">
-						<input class="" type="submit" name="" value="">
-					</div>
-				</form>
-				<form class="u-inline" action="/favourite/add" method="get">
-					<div class="circle">
-						<i class="icon fa fa-plus" aria-hidden="true"></i>
-						<input type="hidden" name="media_type" value="<%= media_type + 's' %>">
-						<input type="hidden" name="media_id" value="<%= id %>">
-						<input class="u-hide" type="submit" name="" value="">
-					</div>
-				</form>
-				<form class="u-inline" action="/favourite/add" method="get">
-					<div class="circle">
-						<i class="icon fa fa-share-alt" aria-hidden="true"></i>
-						<input type="hidden" name="media_type" value="<%= media_type + 's' %>">
-						<input type="hidden" name="media_id" value="<%= id %>">
-						<input class="u-hide" type="submit" name="" value="">
-					</div>
-				</form>
-				<form class="u-inline" action="/favourite/add" method="get">
-					<div class="circle">
-						<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
-						<input type="hidden" name="media_type" value="<%= media_type + 's' %>">
-						<input type="hidden" name="media_id" value="<%= id %>">
-						<input class="u-hide" type="submit" name="" value="">
-					</div>
-				</form>
-			<% } else { %>
-				<div class="circle">
+				<a
+					href="<%= locals.isFavourite === true ?
+						'/favourite/delete?media_type=' + mediaType + '&media_id=' + media.id :
+						'/favourite/add?media_type=' + mediaType + '&media_id=' + media.id
+						%>"
+					class="media-thumbnail__link"
+					>
 					<i class="icon fa fa-heart-o" aria-hidden="true"></i>
-				</div>
-				<div class="circle">
+				</a>
+				<a href="#" class="media-thumbnail__link">
 					<i class="icon fa fa-plus" aria-hidden="true"></i>
-				</div>
-				<div class="circle">
+				</a>
+				<a href="#" class="media-thumbnail__link">
 					<i class="icon fa fa-share-alt" aria-hidden="true"></i>
-				</div>
-				<div class="circle">
+				</a>
+				<a href="#" class="media-thumbnail__link">
 					<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
-				</div>
+				</a>
+			<% } else { %>
+				<a class="media-thumbnail__link">
+					<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+				</a>
+				<a class="media-thumbnail__link">
+					<i class="icon fa fa-plus" aria-hidden="true"></i>
+				</a>
+				<a class="media-thumbnail__link">
+					<i class="icon fa fa-share-alt" aria-hidden="true"></i>
+				</a>
+				<a class="media-thumbnail__link">
+					<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
+				</a>
 			<% } %>
 		</div>
 	</div>
-</a>
+</div>
