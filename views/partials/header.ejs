@@ -16,9 +16,15 @@
         </form>
       </li>
       <li class="nav-item">
-        <a class="nav-link <%= locals.activeLink === 'login'? 'active' : null %>" href="/tv-shows">
+        <a class="nav-link <%= locals.activeLink === 'tv-shows'? 'active' : null %>" href="/tv-shows">
           <!-- <i class="fa fa-tv" aria-hidden="true"></i> -->
           TV Shows
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link <%= locals.activeLink === 'cinema'? 'active' : null %>" href="/cinema">
+          <!-- <i class="fa fa-tv" aria-hidden="true"></i> -->
+          Cinema
         </a>
       </li>
       <% if (locals.isLoggedIn) { %>
