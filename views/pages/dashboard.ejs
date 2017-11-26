@@ -8,23 +8,42 @@
       <% include ../partials/header %>
     </header>
       <main class="container">
-        <section>
-          <h2 class="sectiontitle">Favourite Movies</h2>
-          <ul class="u-clearfix">
-          <% if (favouriteMovies) { %>
 
-            <% favouriteMovies.forEach(function (media) { %>
+        <% if (dashboard_page === "watchlist") { %>
 
-              <%- include('../partials/media-thumbnail', {
-                media: media,
-                mediaType: "movie",
-              }) %>
+          <section class="section">
+
+            <% movies.forEach(function(movie) { %>
 
             <% }) %>
-            
-          <% } %>
-          </ul>
-        </section>
+
+          </section>
+
+        <% } else if (dashboard_page === "favourites") { %>
+
+          <section class="section">
+
+            <% movies.forEach(function(movie) { %>
+              <%- include('../partials/media-thumbnail', {
+                media: movie,
+                mediaType: "tv"
+              }) %>
+            <% }) %>
+
+          </section>
+
+        <% } else if (dashboard_page === "recomended") { %>
+
+          <section class="section">
+
+            <% movies.forEach(function(movie) { %>
+
+            <% }) %>
+
+          </section>
+
+        <% } %>
+
       </main>
     <footer>
       <% include ../partials/footer %>
