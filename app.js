@@ -12,14 +12,15 @@ var LocalStrategy = require('passport-local').Strategy;
 var config = require('./config');
 mongoose.connect(config.database_url);
 var db = mongoose.connection;
-
 var User = require('./models/User.js');
 
+// Routes
 var index = require('./routes/index');
 var login = require('./routes/login');
 var register = require('./routes/register');
 var search = require('./routes/search');
 var tvShows = require('./routes/tv-shows');
+var cinema = require('./routes/cinema');
 var media = require('./routes/media');
 var dashboard = require('./routes/dashboard');
 var favourite = require('./routes/favourite');
@@ -49,7 +50,6 @@ app.use(passport.session());
 
 
 // MIDDLEWARE
-
 app.use(function(req, res, next) {
   var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
 
@@ -94,6 +94,7 @@ app.use('/tv-shows', tvShows);
 app.use('/media', media);
 app.use('/favourite', favourite);
 app.use('/dashboard', dashboard);
+app.use('/cinema', cinema);
 
 app.use(function(req, res, next) {
   var err = new Error('Page Not Found');
