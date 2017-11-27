@@ -109,6 +109,9 @@
           <% if (cast[i]) { %>
 
             <!-- inlude cast-member template here -->
+            <%- include('../partials/cast-member', {
+              cast_member: cast[i]
+            })%>
 
           <% } %>
 
