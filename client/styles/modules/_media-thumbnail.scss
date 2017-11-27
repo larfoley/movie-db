@@ -105,6 +105,10 @@
 
 .media-thumbnail__image {
   width: 100%;
+  min-height: 388px;
+  @media screen and (min-width: 1198px) {
+    height: 388px;
+  }
 }
 
 

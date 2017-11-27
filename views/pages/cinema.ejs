@@ -11,19 +11,20 @@
       <div class="container">
         <section class="section">
           <h2 class="section__title">Cinema</h2>
+          <div class="u-clearfix">
+            <% if (results) { %>
 
-          <% if (results) { %>
-            
-            <% results.forEach( media => { %>
+              <% results.forEach( media => { %>
 
-              <%- include('../partials/media-thumbnail', {
-                media: media,
-                mediaType: "movie",
-              }) %>
+                <%- include('../partials/media-thumbnail', {
+                  media: media,
+                  mediaType: "movie",
+                }) %>
 
-            <% }) %>
+                <% }) %>
 
-          <% } %>
+                <% } %>
+          </div>
         </section>
       </div>
     </main>

@@ -10,10 +10,10 @@
       <main class="container">
         <section class="section">
           <h2 class="section__title">Popular</h2>
-            <ul class="u-clearfix">
+            <div class="u-clearfix">
             <% if (popularMovies) { %>
-                
-              <% popularMovies.filter((m,i) => i < 10).forEach( media => { %>
+
+              <% popularMovies.filter((m,i) => i < 30).forEach( media => { %>
 
                 <%- include('../partials/media-thumbnail', {
                   media: media,
@@ -23,7 +23,7 @@
               <% }) %>
 
             <% } %>
-            </ul>
+          </div>
         </section>
 
         <section class="section">
