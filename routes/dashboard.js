@@ -2,62 +2,60 @@ var config = require('../config');
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User.js');
-var request = require('request-promise');
+var request = require('request');
+
+var movies = [];
+var tv = [];
+var watchlist = [];
 
 router.get('/', function(req, res, next) {
+  res.redirect('/dashboard/favourite');
+})
+
+router.get('/favourite', function(req, res, next) {
   if (req.user) {
-    // Get favourite movies
-    var query = User.findOne({ 'username': req.user.username });
 
-    var x = query.exec(function(err, user) {
-      if (err) {
-        return next(error);
-      }
-
+    var movies = req.user.movies.filter(function(movie) {
+      return movie.isFavourite;
     })
 
-    var movies = [];
-    var movieIDS = req.user.favourite.movies.map(function(movie) {
-      return movie.id;
-    });
+    var tv_shows = req.user.movies.filter(function(tv_show) {
+      return tv_show.isFavourite;
+    })
 
-    if (movieIDS.length > 0) {
-
-      movieIDS.forEach(function (id, i) {
-        var options = {
-          method: 'GET',
-          url: 'https://api.themoviedb.org/3/movie/' + id,
-          qs: { language: 'en-US', api_key: config.api_key },
-          body: '{}'
-        };
-
-        request(options, function (error, response, body) {
-          if (error) throw new Error(error);
-
-          movies.push(JSON.parse(body));
-
-          if (i === movieIDS.length - 1) {
-            res.render('pages/dashboard', {
-              activeLink: "home",
-              isLoggedIn: !!req.user,
-              favouriteMovies: movies,
-            });
-          }
-        });
-      })
-
-    } else {
-      return res.render('pages/dashboard', {
-        activeLink: "home",
-        isLoggedIn: !!req.user,
-        favouriteMovies: movies,
-      });
-    }
-
+    res.render("pages/dashboard", {
+      dashboard_page: 'favourites',
+      "movies": movies,
+      "tv_shows": tv_shows,
+    })
 
   } else {
-    res.redirect('/')
+    res.redirect('/login')
   }
+
+
+})
+
+router.get('/watchlist', function(req, res, next) {
+  if (req.user) {
+
+  } else {
+    res.redirect('/login')
+  }
+})
+
+
+
+router.get('/recomended', function(req, res, next) {
+  var movies = [];
+  var tv_shows = [];
+  var most_popular_genres = {};
+
+  movies.forEach(function(movie) {
+    movie.genres.forEach(function(genre) {
+      most_popular_genres[genre.id] += 1;
+    })
+  })
 
 })
 

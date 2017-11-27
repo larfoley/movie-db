@@ -5,19 +5,36 @@ var UserSchema = new mongoose.Schema({
   name: String,
   username: String,
   password: String,
-  favourite: {
-    movies: [
-      {
-        id: String,
-      }
-    ],
-    tv_shows: [
-      {
-        id: String,
-      }
-    ],
-    genres: Object
-  },
+  movies: [
+    {
+      id: String,
+      title: String,
+      overview: String,
+      backdrop_path: String,
+      poster_path: String,
+      vote_average: Number,
+      vote_count: Number,
+      isFavourite: Boolean,
+      isInWatchlist: Boolean,
+      hasSeen: Boolean,
+      genres: Array
+    }
+  ],
+  tv_shows: [
+    {
+      id: String,
+      name: String,
+      overview: String,
+      backdrop_path: String,
+      poster_path: String,
+      vote_average: Number,
+      vote_count: Number,
+      isFavourite: Boolean,
+      isInWatchlist: Boolean,
+      hasSeen: Boolean,
+      genres: Array
+    }
+  ]
 })
 
 

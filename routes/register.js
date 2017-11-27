@@ -60,6 +60,8 @@ router.post('/', function(req, res, next) {
       username: req.body.username,
       password: req.body.password,
       confirm_password: req.body.confirm_password,
+      movies: [],
+      tv_shows: []
     }).save(function(err) {
       if (err) {
         return next(err)
