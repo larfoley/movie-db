@@ -32,17 +32,55 @@
           				<i class="fa fa-star-o media-thumbnail__star" aria-hidden="true"></i>
           			<% } %>
           		</div>
-
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle-thin fa-stack-2x"></i>
-                <i class="fa fa-heart fa-stack-1x"></i>
-              </span>
-
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle-thin fa-stack-2x"></i>
-                <i class="fa fa-plus fa-stack-1x"></i>
-              </span>
-
+              <% if(isLoggedIn){ %><!-- Favourite Button -->
+                <% if(isFavourite){ %>
+                  <a href="/favourite/delete?media_type=<%=mediaType%>&media_id=<%=media.id%>">
+                  <span class="fa-stack fa-lg isFavourite">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-heart fa-stack-1x"></i>
+                  </span>
+                </a>
+                <% } else { %>
+                  <a href="/favourite/add?media_type=<%=mediaType%>&media_id=<%=media.id%>">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-heart fa-stack-1x"></i>
+                  </span>
+                </a>
+                <% } %>
+              <% } else { %>
+                <a href="/login">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-heart fa-stack-1x"></i>
+                  </span>
+                </a>
+                
+              <% } %>
+              <% if(isLoggedIn){ %><!-- Watchlist Button -->
+                <% if(isInWatchlist){ %>
+                  <a href="/watchlist/delete?media_type=<%=mediaType%>&media_id=<%=media.id%>">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-plus fa-stack-1x"></i>
+                  </span>
+                </a> 
+                <% } else { %>
+                  <a href="/watchlist/add?media_type=<%=mediaType%>&media_id=<%=media.id%>">
+                  <span class="fa-stack fa-lg isInWatchlist">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-plus fa-stack-1x"></i>
+                  </span>
+                </a>
+                <% } %>
+              <% } else { %>
+                <a href="/login">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-plus fa-stack-1x"></i>
+                  </span>
+                </a>
+              <% } %>
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle-thin fa-stack-2x"></i>
                 <i class="fa fa-eye fa-stack-1x"></i>
