@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <header class="site-header">
+      <% include ../partials/header %>
+
+      <section class="section">
+        <div class="container">
+          <h1>Movies</h1>
+          <form class="media-search-form" action="/movies" method="get">
+            <div class="u-inline">
+              <label for="">Select a Genre</label>
+              <select class="" name="genre">
+                <option value="">All</option>
+                <% genres.forEach(function(genre) { %>
+                  <option
+                    value="<%= genre.id %>"
+                    <%= requestedGenre.id == genre.id ? 'selected' : null %>
+                  >
+                  <%= genre.name %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="u-inline">
+                <label for="">Sort by</label>
+                <select class="" name="sort_by">
+                  <option value="release_date.gte">Latest</option>
+                  <option value="popularity.desc" selected>Most Popular</option>
+                  <option value="popularity.asc">Least Popular</option>
+                </select>
+                <input type="submit" name="" value="Search">
+              </div>
+            </form>
+          </div>
+      </section>
+    </header>
+
+    <main class="container">
+      <% if (results) { %>
+        <section class="section">
+
+          <% if (locals.requestedGenre) { %>
+            <h2 class="section__title">
+              <%= requestedFilter + " " + requestedGenre.name %>
+            </h2>
+          <% } %>
+          <ul class="u-clearfix">
+            <% results.forEach(function (media) { %>
+
+              <% if (media) { console.log(media)%>
+
+                <%- include('../partials/media-thumbnail', {
+                  media: media,
+                  mediaType: "movie"
+                }) %>
+
+              <% } %>
+
+            <% }) %>
+          <% } %>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>
