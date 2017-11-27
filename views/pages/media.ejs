@@ -70,7 +70,9 @@
 
           <% if (cast[i]) { %>
 
-            <!-- inlude cast-member template here -->
+            include('../cast-member', {
+              cast_member: cast[i];
+            })
 
           <% } %>
 
