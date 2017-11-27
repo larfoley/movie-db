@@ -8,24 +8,34 @@
       <% include ../partials/header %>
     </header>
     <main class="container">
-      <div class="search-results">
+      <div class="section">
         <% if (results.length > 0 ) {%>
 
-          <% results.forEach(function(media) {%>
+          <% results.forEach(function(media) { %>
 
-            <%- include('../partials/media-thumbnail', {
-              id: media.id,
-              media_type: "movie",
-              img_url: "https://image.tmdb.org/t/p/w200/" + media.poster_path,
-              title: media.title,
-              rating: media.vote_average / 2,
-              year_released: parseInt(media.release_date)
-            }); %>
+            <% if (media) { %>
 
-          <%}) %>
+              <% if (media.media_type === 'person' ) { %>
+
+                <%- include('../partials/cast-member', {
+                  cast_member: media,
+                }); %>
+
+              <% } else { %>
+
+                <%- include('../partials/media-thumbnail', {
+                  mediaType: media.hasOwnProperty('title') ? "movie" : "tv",
+                  media: media
+                }); %>
+
+                <% } %>
+                
+              <% } %>
+
+            <%}) %>
 
         <%} else {%>
-          <p>No results found</p>
+          <h2 class="u-text-center">No results found</p>
         <%}%>
       </div>
     </main>
