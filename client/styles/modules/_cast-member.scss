@@ -1,0 +1,18 @@
+.cast-member-card {
+  color: white;
+  background-color: $primary-color;
+  text-decoration: none;
+  display: inline-block;
+  width: 150px;
+  margin-right: 1em;
+
+
+}
+
+.cast-member-card__name {
+    background-color: $primary-color;
+    text-align: center;
+    margin: 0;
+    margin-right: 1em;
+    padding: 1em 0;
+}
