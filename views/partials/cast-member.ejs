@@ -1,6 +1,6 @@
-<a class="cast-member-card" href="/cast?id=<%cast_member.cast_id">
+<a class="cast-member-card" href="/cast?id=<% cast_member.cast_id %>">
   <div>
-    <img src="<%= cast_member.profile_path %>" alt="Actors Image">
+    <img src="<%= cast_member.profile_path %>" alt="<%% cast_member.name>">
   </div>
   <p class="cast-member-card__name"><%= cast_member.name %></p>
 </a>
