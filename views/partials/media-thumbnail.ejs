@@ -39,7 +39,7 @@
 		<div>
 			<% if (locals.isLoggedIn) { %>
 
-				<% if(isFavourite) { %>
+				<% if(media.isFavourite) { %>
 
 					<a
 						href="<%= '/favourite/delete?media_type=' + mediaType + '&media_id=' + media.id %>"
@@ -61,7 +61,7 @@
 				</a>
 				<% } %>
 
-				<% if(isInWatchList) { %>
+				<% if(media.isInWatchList) { %>
 
 
 					<a
@@ -84,14 +84,16 @@
 				</a>
 				<% } %>
 
+			<% } else { %>
+
+				<a href="/login" class="media-thumbnail__link" title="Login to add to favourites">
+					<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+				</a>
+				<a href="/login" class="media-thumbnail__link" title="Login to add to wathclist">
+					<i class="icon fa fa-plus" aria-hidden="true"></i>
+				</a>
 			<% } %>
 
-			<a href="/login" class="media-thumbnail__link" title="Login to add to favourites">
-				<i class="icon fa fa-heart-o" aria-hidden="true"></i>
-			</a>
-			<a href="/login" class="media-thumbnail__link" title="Login to add to wathclist">
-				<i class="icon fa fa-plus" aria-hidden="true"></i>
-			</a>
 			<a href="#" class="media-thumbnail__link">
 				<i class="icon fa fa-share-alt" aria-hidden="true"></i>
 			</a>

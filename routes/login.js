@@ -4,7 +4,7 @@ var passport = require('passport');
 
 router.get('/', function(req, res, next) {
   if (req.user) {
-    res.redirect('/');
+    return res.redirect('/');
   }
   res.render('pages/login', {
     activeLink: "login",
@@ -14,13 +14,16 @@ router.get('/', function(req, res, next) {
 
 router.post('/',
   function(req, res, next) {
+    if (req.user) {
+      return res.redirect('/');
+    }
     next()
   },
   passport.authenticate('local'),
   function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    return res.render('/');
+    // This only gets called if user is logged in
+    console.log('User is logged in');
+    return res.redirect(req.user.username + ' is logged in');
   });
 
 
