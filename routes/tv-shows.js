@@ -6,7 +6,7 @@ var rp = require('request-promise');
 
 
 router.get('/', function(req, res, next) {
-  console.log(req.user);
+
   var genres, tvShows;
 
   rp({
