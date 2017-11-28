@@ -38,6 +38,23 @@ router.get('/', function(req, res, next) {
     .then(function (response) {
       var tvShows = JSON.parse(response).results;
 
+      if (req.user) {
+        tvShows.forEach(function(tv) {
+          tv.isFavourite = false;
+          tv.isInWatchlist = false;
+
+          console.log(req.user.tv_shows);
+          for (let i = 0; i < req.user.tv_shows.length; i++) {
+
+            if (req.user.tv_shows[i].id == tv.id ) {
+              tv.isFavourite = req.user.tv_shows[i].isFavourite;
+              tv.isInWatchlist = req.user.tv_shows[i].isInWatchlist;
+              break;
+            }
+          }
+        })
+      }
+
       res.render('pages/tv-shows', {
         activeLink: "tv-shows",
         isLoggedIn: !!req.user,

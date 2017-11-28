@@ -23,7 +23,7 @@ router.post('/',
   function(req, res) {
     // This only gets called if user is logged in
     console.log('User is logged in');
-    return res.redirect(req.user.username + ' is logged in');
+    return res.redirect('back');
   });
 
 

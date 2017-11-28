@@ -36,11 +36,44 @@ router.get('/', function(req, res, next) {
     .then(function (response) {
       // Get popularMovies
       popularMovies = JSON.parse(response).results;
+
+      if (req.user) {
+
+        popularMovies.forEach(function(movie, i) {
+          movie.isFavourite = false;
+          movie.isInWatchlist = false;
+  
+          for (let i = 0; i < req.user.movies.length; i++) {
+
+            if (req.user.movies[i].id == movie.id ) {
+              movie.isFavourite = req.user.movies[i].isFavourite;
+              movie.isInWatchlist = req.user.movies[i].isInWatchlist;
+              break;
+            }
+          }
+        })
+
+      }
+
       return rp(options2)
     })
     .then(function (response) {
       // Get latestMovies
       latestMovies = JSON.parse(response).results;
+
+      if (req.user) {
+        latestMovies.forEach(function(movie) {
+          movie.isFavourite = false;
+          movie.isInWatchlist = false;
+          for (let i = 0; i < req.user.movies.length; i++) {
+            if (req.user.movies[i].id == movie.id ) {
+              movie.isFavourite = req.user.movies[i].isFavourite;
+              movie.isInWatchlist = req.user.movies[i].isInWatchlist;
+              break;
+            }
+          }
+        })
+      }
 
       res.render('pages/index', {
         activeLink: "home",
