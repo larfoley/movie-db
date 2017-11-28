@@ -14,15 +14,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/',
   function(req, res, next) {
-    console.log(req.body);
     next()
   },
   passport.authenticate('local'),
   function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
-    console.log("User is logged in");
-    res.redirect('/');
+    return res.render('/');
   });
 
 
