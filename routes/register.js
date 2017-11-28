@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var User = require('../models/User.js');
+var bcrypt = require('bcrypt');
 
 router.get('/', function(req, res, next) {
   res.render('pages/register', {activeLink: "register"});
@@ -55,28 +56,34 @@ router.post('/', function(req, res, next) {
       });
     }
 
-    new User({
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password,
-      confirm_password: req.body.confirm_password,
-      movies: [],
-      tv_shows: []
-    }).save(function(err) {
-      if (err) {
-        return next(err)
+    bcrypt.hash(req.body.password, 10, function(err, hash) {
+      if (err) return next(err);
 
-      } else {
-        //User registration is scuccesfull
-        res.render('pages/register', {
-          activeLink: "register",
-          flash: {
-            type: "success",
-            message: "Thanks for registering"
-          }
-        });
-      }
-    })
+      new User({
+        email: req.body.email,
+        username: req.body.username,
+        password: hash,
+        movies: [],
+        tv_shows: []
+      }).save(function(err) {
+        if (err) {
+          return next(err)
+
+        } else {
+          //User registration is scuccesfull
+          res.render('pages/register', {
+            activeLink: "register",
+            flash: {
+              type: "success",
+              message: "Thanks for registering"
+            }
+          });
+        }
+      })
+
+    });
+
+
 
   })
 
