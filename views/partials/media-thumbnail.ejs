@@ -38,38 +38,63 @@
 		</div>
 		<div>
 			<% if (locals.isLoggedIn) { %>
-				<a
-					href="<%= locals.isFavourite === true ?
-						'/favourite/delete?media_type=' + mediaType + '&media_id=' + media.id :
-						'/favourite/add?media_type=' + mediaType + '&media_id=' + media.id
-						%>"
-					class="media-thumbnail__link"
+
+				<% if(isFavourite) { %>
+
+					<a
+						href="<%= '/favourite/delete?media_type=' + mediaType + '&media_id=' + media.id %>"
+						class="media-thumbnail__link isFavourite"
+						title="Remove from favourites"
 					>
-					<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+					</a>
+
+				<% } else { %>
+
+					<a
+						href="<%= '/favourite/add?media_type=' + mediaType + '&media_id=' + media.id %>"
+						class="media-thumbnail__link isFavourite"
+						title="Add to favourites"
+					>
+						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+					</a>
 				</a>
-				<a href="#" class="media-thumbnail__link">
-					<i class="icon fa fa-plus" aria-hidden="true"></i>
+				<% } %>
+
+				<% if(isInWatchList) { %>
+
+
+					<a
+						href="<%= '/watchlist/delete?media_type=' + mediaType + '&media_id=' + media.id %>"
+						class="media-thumbnail__link isInWatchList"
+						title="Remove from watchlist"
+					>
+						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+					</a>
+
+				<% } else { %>
+
+					<a
+						href="<%= '/watchlist/add?media_type=' + mediaType + '&media_id=' + media.id %>"
+						class="media-thumbnail__link"
+						title="Add to watchlist"
+					>
+						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+					</a>
 				</a>
-				<a href="#" class="media-thumbnail__link">
-					<i class="icon fa fa-share-alt" aria-hidden="true"></i>
-				</a>
-				<a href="#" class="media-thumbnail__link">
-					<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
-				</a>
-			<% } else { %>
-				<a class="media-thumbnail__link">
-					<i class="icon fa fa-heart-o" aria-hidden="true"></i>
-				</a>
-				<a class="media-thumbnail__link">
-					<i class="icon fa fa-plus" aria-hidden="true"></i>
-				</a>
-				<a class="media-thumbnail__link">
-					<i class="icon fa fa-share-alt" aria-hidden="true"></i>
-				</a>
-				<a class="media-thumbnail__link">
-					<i class="icon fa fa-eye-slash" aria-hidden="true"></i>
-				</a>
+				<% } %>
+
 			<% } %>
+
+			<a href="/login" class="media-thumbnail__link" title="Login to add to favourites">
+				<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+			</a>
+			<a href="/login" class="media-thumbnail__link" title="Login to add to wathclist">
+				<i class="icon fa fa-plus" aria-hidden="true"></i>
+			</a>
+			<a href="#" class="media-thumbnail__link">
+				<i class="icon fa fa-share-alt" aria-hidden="true"></i>
+			</a>
 		</div>
 	</div>
 </div>

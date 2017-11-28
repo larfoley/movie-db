@@ -19,7 +19,7 @@
         <div class="container">
           <div class="grid">
             <div class="grid__col grid__col--1-of-2">
-              <h1><%= media.title || media.name %></h1>
+              <h1 class="media-title"><%= media.title || media.name %></h1>
               <div class="media-thumbnail__rating">
           			<% var rating = (Math.round((media.vote_average / 2) * 2) / 2).toFixed(1) %>
           			<% for(var i = 0; i< Math.floor(rating); i++){ %>
@@ -32,59 +32,65 @@
           				<i class="fa fa-star-o media-thumbnail__star" aria-hidden="true"></i>
           			<% } %>
           		</div>
-              <% if(isLoggedIn){ %><!-- Favourite Button -->
-                <% if(isFavourite){ %>
-                  <a href="/favourite/delete?media_type=<%=mediaType%>&media_id=<%=media.id%>">
-                  <span class="fa-stack fa-lg isFavourite">
-                    <i class="fa fa-circle-thin fa-stack-2x"></i>
-                    <i class="fa fa-heart fa-stack-1x"></i>
-                  </span>
-                </a>
+              <% if(isLoggedIn) { %>
+
+                <% if(isFavourite) { %>
+
+                  <a
+                    href="<%= '/favourite/delete?media_type=' + mediaType + '&media_id=' + media.id %>"
+        					  class="media-thumbnail__link isFavourite"
+                    title="Remove from favourites"
+        					>
+        						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+        					</a>
+
                 <% } else { %>
-                  <a href="/favourite/add?media_type=<%=mediaType%>&media_id=<%=media.id%>">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle-thin fa-stack-2x"></i>
-                    <i class="fa fa-heart fa-stack-1x"></i>
-                  </span>
+
+                  <a
+                    href="<%= '/favourite/add?media_type=' + mediaType + '&media_id=' + media.id %>"
+        					  class="media-thumbnail__link isFavourite"
+                    title="Add to favourites"
+        					>
+        						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+        					</a>
                 </a>
                 <% } %>
-              <% } else { %>
-                <a href="/login">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle-thin fa-stack-2x"></i>
-                    <i class="fa fa-heart fa-stack-1x"></i>
-                  </span>
+
+                <% if(isInWatchList) { %>
+
+
+                  <a
+                    href="<%= '/watchlist/delete?media_type=' + mediaType + '&media_id=' + media.id %>"
+        					  class="media-thumbnail__link isInWatchList"
+                    title="Remove from watchlist"
+        					>
+        						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+        					</a>
+
+                <% } else { %>
+
+                  <a
+                    href="<%= '/watchlist/add?media_type=' + mediaType + '&media_id=' + media.id %>"
+        					  class="media-thumbnail__link"
+                    title="Add to watchlist"
+        					>
+        						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+        					</a>
                 </a>
+                <% } %>
 
               <% } %>
-              <% if(isLoggedIn){ %><!-- Watchlist Button -->
-                <% if(isInWatchlist){ %>
-                  <a href="/watchlist/delete?media_type=<%=mediaType%>&media_id=<%=media.id%>">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle-thin fa-stack-2x"></i>
-                    <i class="fa fa-plus fa-stack-1x"></i>
-                  </span>
-                </a>
-                <% } else { %>
-                  <a href="/watchlist/add?media_type=<%=mediaType%>&media_id=<%=media.id%>">
-                  <span class="fa-stack fa-lg isInWatchlist">
-                    <i class="fa fa-circle-thin fa-stack-2x"></i>
-                    <i class="fa fa-plus fa-stack-1x"></i>
-                  </span>
-                </a>
-                <% } %>
-              <% } else { %>
-                <a href="/login">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle-thin fa-stack-2x"></i>
-                    <i class="fa fa-plus fa-stack-1x"></i>
-                  </span>
-                </a>
-              <% } %>
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle-thin fa-stack-2x"></i>
-                <i class="fa fa-eye fa-stack-1x"></i>
-              </span>
+
+              <a href="/login" class="media-thumbnail__link" title="Login to add to favourites">
+    						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+    					</a>
+    					<a href="/login" class="media-thumbnail__link" title="Login to add to wathclist">
+    						<i class="icon fa fa-plus" aria-hidden="true"></i>
+    					</a>
+    					<a href="#" class="media-thumbnail__link">
+    						<i class="icon fa fa-share-alt" aria-hidden="true"></i>
+    					</a>
+
             </div>
             <div class="grid__col grid__col--1-of-2">
               <h2>Overview</h2>
