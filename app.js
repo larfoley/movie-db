@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var satelize = require('satelize');
 var passport = require('passport');
+var bcrypt = require('bcrypt');
 var LocalStrategy = require('passport-local').Strategy;
 var config = require('./config');
 mongoose.connect(config.database_url);
@@ -29,12 +30,52 @@ var movies = require('./routes/movies');
 var app = express();
 
 db.on('error', function() {
-  console.error.call(console, 'connection error:')
+  console.error.call(console, 'error connecting to database')
 });
 db.once('open', function() {
-  console.log("connected");
+  console.log("connected to database");
 });
 
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+
+    // Find user
+    User.findOne({ username: username }, function (err, user) {
+      if (err) return done(err);
+
+      // Check if user exisits
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+
+      // Check if password is vaild
+      bcrypt.compare(password, user.password, function(err, res) {
+          if (err) return done(err);
+
+          if (res) {
+            return done(null, user);
+
+          } else {
+            return done(null, false, { message: 'Incorrect password.' });
+
+          }
+      });
+
+    });
+  }
+));
+
+// serialized to the session, and deserialized when subsequent requests are made.
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -50,42 +91,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// MIDDLEWARE
 app.use(function(req, res, next) {
   var ip = req.header('x-forwarded-for') || req.connection.remoteAddress;
 
   satelize.satelize({ip:'2a02:8084:80:6e00:3dcd:ffd6:93f1:d68'}, function(err, payload) {
+    if (err) return next(err);
+    
     req.country_code = payload.country_code;
   });
 
   next();
 })
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
 
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
+
 
 app.use('/', index);
 app.use('/login', login);
