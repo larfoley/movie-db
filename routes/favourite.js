@@ -5,7 +5,7 @@ var request = require('request');
 var User = require('../models/User.js');
 
 router.get('/add', function(req, res, next) {
-  
+
     var user = req.user;
     var media_id = req.query.media_id;
     var media_type = req.query.media_type;
@@ -63,23 +63,26 @@ router.get('/add', function(req, res, next) {
           qs: { api_key: config.api_key },
           body: '{}' }
 
-          console.log(api_options.url, "mt");
         request(api_options, function (error, response, body) {
           if (error) throw new Error(error);
 
           var media = JSON.parse(body);
           media.isFavourite = true;
           media.isInWatchlist = false;
-          media.hasSeen = false;
 
-          user.movies.push(media);
+          if (media_type === "movie") {
+            user.movies.push(media);
+          } else {
+            user.tv_shows.push(media);
+          }
+
 
           // Update db
           User.findOneAndUpdate({ 'username': req.user.username }, user, function(err, doc) {
             if (err) {
               next(err);
             } else {
-              res.send('favourite added')
+              res.redirect('back')
             }
           })
 

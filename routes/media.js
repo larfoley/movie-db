@@ -20,6 +20,26 @@ router.get('/', function (req, res, next) {
       media = JSON.parse(response);
       media.isFavourite = false;
       media.isInWatchlist = false;
+
+      if (req.user) {
+
+        if (mediaType === "movie") {
+
+          req.user.movies.forEach(function(movie) {
+            if (movie.id == media.id) {
+              media.isFavourite = movie.isFavourite;
+              media.isInWatchlist = movie.isInWatchlist;
+            }
+          })
+        } else {
+          req.user.tv_shows.forEach(function(tv) {
+            if (tv.id == media.id) {
+              media.isFavourite = tv.isFavourite;
+              media.isInWatchlist = tv.isInWatchlist;
+            }
+          })
+        }
+      }
       return rp({
         method: 'GET',
         url: 'https://api.themoviedb.org/3/' + mediaType + '/' + id + '/similar',
@@ -33,6 +53,20 @@ router.get('/', function (req, res, next) {
     })
     .then(function (response) {
       relatedMedia = JSON.parse(response).results;
+      if (req.user) {
+        relatedMedia.forEach(function(m) {
+
+          req.user[m.hasOwnProperty("title") ? "movies" : "tv_shows"].forEach(function(um) {
+            if (m.id === um.id) {
+              m.isFavourite = um.isFavourite;
+              m.isInWatchlist = um.isInWatchlist;
+            } else {
+              m.isFavourite = false;
+              m.isInWatchlist = false;
+            }
+          })
+        })
+      }
       return rp({
         method: 'GET',
         url: 'https://api.themoviedb.org/3/' + mediaType + '/' + id + '/credits',
