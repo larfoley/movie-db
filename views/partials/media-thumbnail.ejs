@@ -39,7 +39,7 @@
 		<div>
 			<% if (locals.isLoggedIn) { %>
 
-				<% if(media.isFavourite) { %>
+				<% if(media.isFavourite === true) { %>
 
 					<a
 						href="<%= '/favourite/delete?media_type=' + mediaType + '&media_id=' + media.id %>"
@@ -53,7 +53,7 @@
 
 					<a
 						href="<%= '/favourite/add?media_type=' + mediaType + '&media_id=' + media.id %>"
-						class="media-thumbnail__link isFavourite"
+						class="media-thumbnail__link"
 						title="Add to favourites"
 					>
 						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
@@ -61,7 +61,7 @@
 				</a>
 				<% } %>
 
-				<% if(media.isInWatchList) { %>
+				<% if(media.isInWatchList === true) { %>
 
 
 					<a
@@ -79,7 +79,7 @@
 						class="media-thumbnail__link"
 						title="Add to watchlist"
 					>
-						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+						<i class="icon fa fa-plus" aria-hidden="true"></i>
 					</a>
 				</a>
 				<% } %>
