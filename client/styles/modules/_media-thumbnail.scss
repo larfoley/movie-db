@@ -96,6 +96,10 @@
 .media-thumbnail__image-wrapper {
   position: relative;
   text-align: center;
+
+  a {
+    color: white;
+  }
 }
 
 .media-thumbnail__more-info {
@@ -132,19 +136,36 @@
 }
 
 .media-thumbnail__link {
+  font-size: 17px;
   display: inline-block;
   border-radius: 50%;
-  padding: .9em;
-  border: 2px solid white;
+  padding: .5em .6em;
+  border: 2.5px solid #fff;
   margin-right: 5px;
-  color: white;
+  color: #fff;
+  transition: .3s;
 
   &:last-child {
     margin-right: 0;
   }
-  &:hover {
+
+  &:hover,
+  &.isFavourite,
+  &.isInWatchList {
     background-color: $brand-color;
     border-color: $brand-color;
     color: white;
   }
+
+  &
+
+  &.isFavourite:hover .fa:before {
+    content: "f00d";
+  }
+
+  &.isInWatchList:hover .fa:before {
+    content: "f00d";
+  }
+
+
 }
