@@ -1,7 +1,6 @@
 var config = require('../config');
 var express = require('express');
 var router = express.Router();
-var request = require("request");
 var rp = require('request-promise');
 
 router.get('/', function (req, res, next) {
@@ -19,6 +18,8 @@ router.get('/', function (req, res, next) {
     })
     .then(function (response) {
       media = JSON.parse(response);
+      media.isFavourite = false;
+      media.isInWatchlist = false;
       return rp({
         method: 'GET',
         url: 'https://api.themoviedb.org/3/' + mediaType + '/' + id + '/similar',
