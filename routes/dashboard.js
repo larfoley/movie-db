@@ -24,6 +24,7 @@ router.get('/favourite', function(req, res, next) {
     })
 
     res.render("pages/dashboard", {
+      "isLoggedIn": !!req.user,
       dashboard_page: 'favourites',
       "movies": movies,
       "tv_shows": tv_shows,
