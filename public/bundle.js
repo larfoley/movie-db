@@ -75,6 +75,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__js_ejsClient_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__js_ejsClient_js__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__js_getJson_js__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__js_getJson_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__js_getJson_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__js_nav_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__js_nav_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__js_nav_js__);
 
 
 
@@ -143,6 +145,22 @@ module.exports = function(url, callback) {
   }
   xhr.send();
 }
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+var navToggler = document.querySelector(".nav-toggler");
+var navList = document.querySelector(".nav-list");
+
+navToggler.addEventListener("click", function(){
+  if(!navList.classList.contains("nav-collapse")) {
+    navList.classList.add("nav-collapse");
+  } else {
+    navList.classList.remove("nav-collapse");
+  }
+});
 
 
 /***/ })
