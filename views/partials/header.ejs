@@ -22,6 +22,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link <%= locals.activeLink === 'movies'? 'active' : null %>" href="/movies">
+          <!-- <i class="fa fa-tv" aria-hidden="true"></i> -->
+          Movies
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link <%= locals.activeLink === 'cinema'? 'active' : null %>" href="/cinema">
           <!-- <i class="fa fa-tv" aria-hidden="true"></i> -->
           Cinema
