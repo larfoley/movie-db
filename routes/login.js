@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
   res.render('pages/login', {
     activeLink: "login",
     isLoggedIn: !!req.user,
+    username: req.user? req.user.username : null,
   });
 });
 

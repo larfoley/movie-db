@@ -5,7 +5,7 @@ var request = require("request");
 
 
 router.get('/', function(req, res, next) {
-  
+
   var options = { method: 'GET',
   url: 'https://api.themoviedb.org/3/movie/now_playing',
   qs: {
@@ -21,6 +21,7 @@ router.get('/', function(req, res, next) {
     res.render('pages/cinema', {
       activeLink: "cinema",
       isLoggedIn: !!req.user,
+      username: req.user? req.user.username : null,
       results: JSON.parse(body).results
     });
   });

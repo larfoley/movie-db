@@ -61,7 +61,7 @@ router.get('/', function(req, res, next) {
         popularMovies.forEach(function(movie, i) {
           movie.isFavourite = false;
           movie.isInWatchlist = false;
-  
+
           for (let i = 0; i < req.user.movies.length; i++) {
 
             if (req.user.movies[i].id == movie.id ) {
@@ -102,7 +102,7 @@ router.get('/', function(req, res, next) {
         popularTvShows.forEach(function(tvShow, i) {
           tvShow.isFavourite = false;
           tvShow.isInWatchlist = false;
-  
+
           for (let i = 0; i < req.user.tv_shows.length; i++) {
 
             if (req.user.movies[i].id == tvShow.id ) {
@@ -134,6 +134,7 @@ router.get('/', function(req, res, next) {
       res.render('pages/index', {
         activeLink: "home",
         isLoggedIn: !!req.user,
+        username: req.user? req.user.username : null,
         popularMovies: popularMovies,
         latestMovies: latestMovies,
         popularTvShows: popularTvShows,

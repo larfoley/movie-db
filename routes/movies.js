@@ -39,6 +39,7 @@ router.get('/', function(req, res, next) {
       res.render('pages/movies', {
         activeLink: "movies",
         isLoggedIn: !!req.user,
+        username: req.user? req.user.username : null,
         requestedGenre: (function() {
           var g = {id: req.query.genre}
           if (genres instanceof Array) {

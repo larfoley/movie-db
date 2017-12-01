@@ -21,7 +21,11 @@ router.post('/', function(req, res, next) {
 
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
-    res.render('pages/search-results', {results: JSON.parse(body).results || []});
+    res.render('pages/search-results', {
+      results: JSON.parse(body).results || [],
+      username: req.user? req.user.username : null,
+      loggedIn: !!req.user
+    });
   });
 });
 

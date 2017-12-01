@@ -81,6 +81,7 @@ router.get('/', function (req, res, next) {
       res.render('pages/media', {
         mediaType: mediaType,
         isLoggedIn: !!req.user,
+        username: req.user? req.user.username : null,
         media: media,
         relatedMedia: relatedMedia,
         cast: cast
