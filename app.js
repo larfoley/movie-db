@@ -25,6 +25,7 @@ var cinema = require('./routes/cinema');
 var media = require('./routes/media');
 var dashboard = require('./routes/dashboard');
 var favourite = require('./routes/favourite');
+var watchlist = require('./routes/watchlist');
 var movies = require('./routes/movies');
 
 var app = express();
@@ -96,16 +97,12 @@ app.use(function(req, res, next) {
 
   satelize.satelize({ip:'2a02:8084:80:6e00:3dcd:ffd6:93f1:d68'}, function(err, payload) {
     if (err) return next(err);
-    
+
     req.country_code = payload.country_code;
   });
 
   next();
 })
-
-
-
-
 
 app.use('/', index);
 app.use('/login', login);
@@ -114,6 +111,7 @@ app.use('/search', search);
 app.use('/tv-shows', tvShows);
 app.use('/media', media);
 app.use('/favourite', favourite);
+app.use('/watchlist', watchlist);
 app.use('/dashboard', dashboard);
 app.use('/cinema', cinema);
 app.use('/movies', movies);

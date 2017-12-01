@@ -33,31 +33,58 @@ var UserSchema = new mongoose.Schema({
       isInWatchlist: Boolean,
       hasSeen: Boolean,
       genres: Array
-    }
-  ]
+    },
+  ],
+  most_popular_movie_genres: Array,
+  most_popular_tv_genres: Array
 })
 
+var User = mongoose.model('User', UserSchema);
 
-UserSchema.methods.validPassword = function ( pwd ) {
-    return ( this.password === pwd );
-};
+UserSchema.methods.addToFavourites = function(user) {
 
-UserSchema.methods.addToFavourites = function (media) {
-  var query = User.findOne({ 'email': 'bob@bob.com' });
-  return query;
-  // this.findById(id, function (err, user) {
-  //   if (err) return handleError(err);
-  //
-  //   user.size = 'large';
-  //   user.save(function (err, updatedTank) {
-  //     if (err) return handleError(err);
-  //     res.send(updatedTank);
-  //   });
-  // });
+  User.findOneAndUpdate({ 'username': user.username }, user, function(err, doc) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(doc);
+    }
+  })
 
 }
 
+UserSchema.methods.removeGenre = function(type, name) {
 
-var User = mongoose.model('User', UserSchema);
+  this.findOneAndUpdate({username: "username"}, function(err, user) {
+
+    var genres = type === "movie" ?
+    this.most_popular_movie_genres :
+    this.most_popular_tv_genres;
+
+    for (var i = 0; i < genres.length; i++) {
+      // name?
+      if (genres[i].name === name) {
+        if (genres[i].count === 1) {
+          genres.splice(i, 1);
+        } else {
+          genres[i].count--;
+        }
+      }
+    }
+
+    user.save(function(err, updatedUser) {
+      if (err) throw new Error();
+    })
+
+  })
+
+}
+
+// var sortMostPopularGenres = function() {
+//   most_popular_genres.sort(function(a, b) {
+//     return a.count - b.count;
+//   })
+// }
+
 
 module.exports = User;

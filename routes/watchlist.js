@@ -39,12 +39,12 @@ router.get('/add', function(req, res, next) {
       if (media) {
         // if true then user already has that movie saved,
         // so check if he has it set as a favourite
-        if (media.isFavourite) {
+        if (media.isInWatchlist) {
           // redirect
           return res.redirect('/');
         }
 
-        media.isFavourite = true;
+        media.isInWatchlist = true;
 
         User.findOneAndUpdate({ 'username': req.user.username }, user, function(err, doc) {
           if (err) {
@@ -67,8 +67,8 @@ router.get('/add', function(req, res, next) {
           if (error) throw new Error(error);
 
           var media = JSON.parse(body);
-          media.isFavourite = true;
-          media.isInWatchlist = false;
+          media.isFavourite = false;
+          media.isInWatchlist = true;
 
           // Update the genres wathced by the user
           var genreAlreadyExists = false;
