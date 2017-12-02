@@ -1,0 +1,25 @@
+.button {
+  background-color: $brand-color;
+  padding: 1.25em 2.3em;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  display: block;
+  margin: 1em 0;
+  min-width: 170px;
+  text-align: center;
+  border-bottom: 4px solid darken($brand-color, 20%);
+  transition: .3s;
+  @media screen and (min-width: 500px) {
+    margin-right: 1em;
+    display: inline-block;
+  }
+
+  &:hover {
+    background-color: darken($brand-color, 10%);
+  }
+}
