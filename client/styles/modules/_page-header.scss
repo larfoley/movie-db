@@ -1,0 +1,38 @@
+.page-header {
+  text-align: center;
+  background-color: $brand-color;
+  background-image: url("/images/masthead.jpg");
+  background-size: cover;
+  background-position: center;
+  background-color: black;
+  color: white;
+  position: relative;
+  height: 500px;
+}
+
+.page-header__overlay {
+  padding-top: 8em;
+  height:  100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgba(25,25,25, 0.6);
+}
+
+.page-title {
+  text-transform: uppercase;
+  font-size: 2.55em;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 1em;
+  &:after {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 6px;
+    background: white;
+    margin: auto;
+    margin-top: 7px;
+  }
+}
