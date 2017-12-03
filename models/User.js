@@ -80,11 +80,7 @@ UserSchema.methods.removeGenre = function(type, name) {
 
 }
 
-// var sortMostPopularGenres = function() {
-//   most_popular_genres.sort(function(a, b) {
-//     return a.count - b.count;
-//   })
-// }
+
 
 
 module.exports = User;

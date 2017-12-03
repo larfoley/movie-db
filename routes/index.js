@@ -14,7 +14,7 @@ var options = { method: 'GET',
     api_key: config.api_key
   },
   body: '{}' };
-
+zz
 var options2 = { method: 'GET',
   url: 'https://api.themoviedb.org/3/discover/tv',
   qs: {
@@ -73,6 +73,25 @@ router.get('/', function(req, res, next) {
           }
         })
       }
+      return rp(options4)
+    })
+    .then(function (response){
+      // Get latestTvShows
+      latestTvShows = JSON.parse(response).results;
+      if (req.user) {
+        latestTvShows.forEach(function(tvShow) {
+          tvShow.isFavourite = false;
+          tvShow.isInWatchlist = false;
+          for (let i = 0; i < req.user.tv_shows.length; i++) {
+            if (req.user.movies[i].id == tvShow.id ) {
+              tvShow.isFavourite = req.user.tv_shows[i].isFavourite;
+              tvShow.isInWatchlist = req.user.tv_shows[i].isInWatchlist;
+              break;
+            }
+          }
+        })
+      }
+
       res.render('pages/index', {
         activeLink: "home",
         isLoggedIn: !!req.user,
