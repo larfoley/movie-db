@@ -89,7 +89,7 @@ router.get('/add', function(req, res, next) {
 
             if (!genreAlreadyExists) {
               console.log("Adding genre");
-              genres.push({genre: g.name, count: 1});
+              genres.push({genre: g.name, count: 1, id: g.id});
             }
 
           })
