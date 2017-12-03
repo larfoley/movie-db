@@ -39,24 +39,6 @@
         </section>
 
         <section class="section">
-          <h2 class="section__title">Lastest Movies</h2>
-          <ul class="u-clearfix">
-            <% if (latestMovies) { %>
-
-              <% latestMovies.filter((m,i) => i < 8).forEach( media => { %>
-                <% if(media.poster_path != null){ %>
-                  <%- include('../partials/media-thumbnail', {
-                    media: media,
-                    mediaType: "movie",
-                  }) %>
-                <% } %>
-              <% }) %>
-
-            <% } %>
-          </ul>
-        </section>
-
-        <section class="section">
           <h2 class="section__title">Popular Tv Shows</h2>
             <div class="u-clearfix">
             <% if (popularTvShows) { %>
@@ -73,24 +55,7 @@
             <% } %>
           </div>
         </section>
-        <section class="section">
-          <h2 class="section__title">Lastest Tv Shows</h2>
-          <ul class="u-clearfix">
-            <% if (latestTvShows) { %>
-
-              <% latestTvShows.filter((m,i) => i < 8).forEach( media => { %>
-                <% if(media.poster_path != null){ %>
-                  <%- include('../partials/media-thumbnail', {
-                    media: media,
-                    mediaType: "tv",
-                  }) %>
-                <% } %>
-
-              <% }) %>
-
-            <% } %>
-          </ul>
-        </section>
+        
       </main>
     <footer>
       <% include ../partials/footer %>
