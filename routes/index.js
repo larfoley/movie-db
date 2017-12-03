@@ -131,6 +131,7 @@ router.get('/', function(req, res, next) {
           }
         })
       }
+
       res.render('pages/index', {
         activeLink: "home",
         isLoggedIn: !!req.user,
