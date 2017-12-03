@@ -97,8 +97,9 @@ app.use(function(req, res, next) {
 
   satelize.satelize({ip:'2a02:8084:80:6e00:3dcd:ffd6:93f1:d68'}, function(err, payload) {
     if (err) return next(err);
-
+    console.log(payload);
     req.country_code = payload.country_code;
+    req.country = payload.country["en"];
   });
 
   next();
