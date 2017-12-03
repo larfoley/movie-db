@@ -22,7 +22,8 @@ router.get('/', function(req, res, next) {
       activeLink: "cinema",
       isLoggedIn: !!req.user,
       username: req.user? req.user.username : null,
-      results: JSON.parse(body).results
+      results: JSON.parse(body).results,
+      country: req.country
     });
   });
 

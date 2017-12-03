@@ -65,6 +65,7 @@ router.get('/', function(req, res, next) {
               filter = "Least Popular"
               break;
             default:
+            
           }
 
           return filter;

@@ -7,7 +7,7 @@
     <header class="site-header">
       <% include ../partials/header %>
 
-      <section class="section">
+      <section class="media-search-header">
         <div class="container">
           <h1>Movies</h1>
           <form class="media-search-form" action="/movies" method="get">
@@ -40,12 +40,17 @@
     </header>
 
     <main class="container">
-      <% if (results) { %>
-        <section class="section">
+      <section class="section">
+        <%= results.length + " Results" %>
+      <% if (results) {
 
-          <% if (locals.requestedGenre) { %>
+          if (locals.requestedGenre && locals.requestedFilter) { %>
             <h2 class="section__title">
               <%= requestedFilter + " " + requestedGenre.name %>
+            </h2>
+          <% } else { %>
+            <h2 class="section__title">
+              Most Popular
             </h2>
           <% } %>
           <ul class="u-clearfix">
