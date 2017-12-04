@@ -157,14 +157,12 @@
     color: white;
   }
 
-  &
-
   &.isFavourite:hover .fa:before {
-    content: "f00d";
+    content: "\f00d";
   }
 
   &.isInWatchList:hover .fa:before {
-    content: "f00d";
+    content: "\f00d";
   }
 
 
