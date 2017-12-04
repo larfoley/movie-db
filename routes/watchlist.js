@@ -48,9 +48,9 @@ router.get('/add', function(req, res, next) {
 
         User.findOneAndUpdate({ 'username': req.user.username }, user, function(err, doc) {
           if (err) {
-            console.log(err);
+            next(err);
           } else {
-            console.log("DOC", doc);
+            res.redirect('back')
           }
         })
 
@@ -106,7 +106,6 @@ router.get('/add', function(req, res, next) {
             if (err) {
               next(err);
             } else {
-              console.log("DOC", doc);
               res.redirect('back')
             }
           })
@@ -135,7 +134,11 @@ router.get('/delete', function(req, res, next) {
 
     for (var i = 0; i < user.movies.length; i++) {
       if (user.movies[i].id === media_id) {
-        user.movies.splice(i, 1);
+        if (user.movies[i].isFavourite === false) {
+          user.movies.splice(i, 1);
+        } else {
+          user.movies[i].isInWatchlist = false;
+        }
         break;
       }
     }

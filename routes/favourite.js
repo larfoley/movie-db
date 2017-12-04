@@ -48,9 +48,9 @@ router.get('/add', function(req, res, next) {
 
         User.findOneAndUpdate({ 'username': req.user.username }, user, function(err, doc) {
           if (err) {
-            console.log(err);
+            next(err);
           } else {
-            console.log("DOC", doc);
+            res.redirect('back')
           }
         })
 
@@ -106,7 +106,6 @@ router.get('/add', function(req, res, next) {
             if (err) {
               next(err);
             } else {
-              console.log("DOC", doc);
               res.redirect('back')
             }
           })
@@ -145,7 +144,11 @@ router.get('/delete', function(req, res, next) {
 
     for (var i = 0; i < user.tv_shows.length; i++) {
       if (tv_shows[i].id === media_id) {
-        tv_shows.splice(i, 1);
+        if (user.tv_shows[i].isFavourite === false) {
+          user.tv_shows.splice(i, 1);
+        } else {
+          user.tv_shows[i].isInWatchlist = false;
+        }
         break;
       }
     }
@@ -156,7 +159,6 @@ router.get('/delete', function(req, res, next) {
     if (err) {
       next(err);
     } else {
-      console.log("DOC", doc);
       res.redirect('back')
     }
   })
