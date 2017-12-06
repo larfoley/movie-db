@@ -18,6 +18,7 @@ var User = require('./models/User.js');
 // Routes
 var index = require('./routes/index');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 var register = require('./routes/register');
 var search = require('./routes/search');
 var tvShows = require('./routes/tv-shows');
@@ -107,6 +108,7 @@ app.use(function(req, res, next) {
 
 app.use('/', index);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/register', register);
 app.use('/search', search);
 app.use('/tv-shows', tvShows);
