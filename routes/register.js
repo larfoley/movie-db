@@ -5,7 +5,7 @@ var User = require('../models/User.js');
 var bcrypt = require('bcrypt');
 
 router.get('/', function(req, res, next) {
-  res.render('pages/register', {activeLink: "register"});
+  res.render('pages/register', {activeLink: "register", page_title: "Register"});
 });
 
 router.post('/', function(req, res, next) {
