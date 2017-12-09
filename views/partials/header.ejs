@@ -10,7 +10,7 @@
     </div>
     <ul class="nav-list nav-collapse">
       <li class="nav-item">
-        <form class="search-form" action="/search" method="post">
+        <form class="search-form" action="/search" method="get">
           <input class="search-input" type="text" name="query" placeholder="Search for a Movie...">
           <button><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
@@ -38,6 +38,12 @@
           <a class="nav-link <%= locals.activeLink === 'dashboard'? 'active' : null %>" href="/dashboard">
             <i class="fa fa-user" aria-hidden="true"></i>
             <%= username %>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">
+            <i class="fa fa-sign-out" aria-hidden="true"></i>
+            Logout
           </a>
         </li>
       <% } else { %>

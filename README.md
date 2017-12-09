@@ -101,7 +101,9 @@ router.get('/', function(req, res, next) {
  
  // NOTE: this method will look for a file called /views/pages/example.ejs
  // If this file does not exists you will get an error
-}
+})
+
+module.exports = router;
 ```
 
 ### Require the route

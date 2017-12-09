@@ -130,11 +130,17 @@ router.get('/delete', function(req, res, next) {
     return res.redirect('/login')
   }
 
+
+
   if (media_type === "movie") {
 
     for (var i = 0; i < user.movies.length; i++) {
       if (user.movies[i].id === media_id) {
-        user.movies.splice(i, 1);
+        if (user.movies[i].isInWatchlist === false) {
+          user.movies.splice(i, 1);
+        } else {
+          user.movies[i].isFavourite = false;
+        }
         break;
       }
     }
@@ -143,6 +149,7 @@ router.get('/delete', function(req, res, next) {
   } else {
 
     for (var i = 0; i < user.tv_shows.length; i++) {
+      console.log(tv_shows[i]);
       if (tv_shows[i].id === media_id) {
         if (user.tv_shows[i].isFavourite === false) {
           user.tv_shows.splice(i, 1);

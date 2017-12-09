@@ -28,9 +28,24 @@
               <div class="u-inline">
                 <label for="">Sort by</label>
                 <select class="" name="sort_by">
-                  <option value="release_date.gte">Latest</option>
-                  <option value="popularity.desc" selected>Most Popular</option>
-                  <option value="popularity.asc">Least Popular</option>
+                  <option
+                    value="release_date.asc"
+                    <%= requestedFilter === "Latest" ? "selected" : null %>
+                    >
+                    Latest
+                  </option>
+                  <option
+                    value="popularity.desc"
+                    <%= requestedFilter === "Most Popular" ? "selected" : null %>
+                    >
+                    Most Popular
+                  </option>
+                  <option
+                    value="popularity.asc"
+                    <%= requestedFilter === "Least Popular" ? "selected" : null %>
+                    >
+                    Least Popular
+                  </option>
                 </select>
                 <input type="submit" name="" value="Search">
               </div>
@@ -41,32 +56,32 @@
 
     <main class="container">
       <section class="section">
-        <%= results.length + " Results" %>
-      <% if (results) {
+        <% if (results) { %>
+          <%= results.length + " Results" %>
 
-          if (locals.requestedGenre && locals.requestedFilter) { %>
-            <h2 class="section__title">
-              <%= requestedFilter + " " + requestedGenre.name %>
-            </h2>
-          <% } else { %>
-            <h2 class="section__title">
-              Most Popular
-            </h2>
-          <% } %>
-          <ul class="u-clearfix">
-            <% results.forEach(function (media) { %>
+            <% if (locals.requestedGenre && locals.requestedFilter) { %>
+              <h2 class="section__title">
+                <%= requestedFilter + " " + (requestedGenre.name || "TV Shows") %>
+              </h2>
+            <% } else { %>
+              <h2 class="section__title">
+                Most Popular
+              </h2>
+            <% } %>
+            <ul class="u-clearfix">
+              <% results.forEach(function (media) { %>
 
-              <% if (media) { console.log(media)%>
+                <% if (media) { %>
 
-                <%- include('../partials/media-thumbnail', {
-                  media: media,
-                  mediaType: "movie"
-                }) %>
+                  <%- include('../partials/media-thumbnail', {
+                    media: media,
+                    mediaType: "movie"
+                  }) %>
 
-              <% } %>
+                <% } %>
 
-            <% }) %>
-          <% } %>
+              <% }) %>
+            <% } %>
         </ul>
       </section>
     </main>
