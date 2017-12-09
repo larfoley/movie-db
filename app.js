@@ -24,6 +24,7 @@ var cinema = require('./routes/cinema');
 var media = require('./routes/media');
 var dashboard = require('./routes/dashboard');
 var favourite = require('./routes/favourite');
+var cast_member = require('./routes/cast-member');
 
 var app = express();
 
@@ -95,6 +96,7 @@ app.use('/media', media);
 app.use('/favourite', favourite);
 app.use('/dashboard', dashboard);
 app.use('/cinema', cinema);
+app.use('/cast-member', cast_member);
 
 app.use(function(req, res, next) {
   var err = new Error('Page Not Found');
