@@ -29,10 +29,7 @@ var dashboard = require('./routes/dashboard');
 var favourite = require('./routes/favourite');
 var watchlist = require('./routes/watchlist');
 var movies = require('./routes/movies');
-<<<<<<< HEAD
-var recommended = require('./routes/recommended');
 var cast = require('./routes/cast');
-=======
 
 // Api
 var api_movies = require('./api/movies');
@@ -41,7 +38,6 @@ var api_search = require('./api/search');
 var api_genres = require('./api/genres');
 var api_media_details = require("./api/media-details")
 var api_recommended = require('./api/user/recommended');
->>>>>>> 072eca84b5d08021b3f80cbaedb2a209ef674b06
 
 var app = express();
 
@@ -139,12 +135,9 @@ app.use('/watchlist', watchlist);
 app.use('/dashboard', dashboard);
 app.use('/cinema', cinema);
 app.use('/movies', movies);
-<<<<<<< HEAD
-app.use('/recommended', recommended);
 app.use('/cast', cast);
-=======
+app.use('/recommended', recommended);
 
->>>>>>> 072eca84b5d08021b3f80cbaedb2a209ef674b06
 
 app.use(function(req, res, next) {
   var err = new Error('Page Not Found');
