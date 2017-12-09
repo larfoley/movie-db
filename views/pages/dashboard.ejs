@@ -11,8 +11,12 @@
         <div class="dashboard">
           <div class="dashboard__sidebar">
             <nav class="dashboard__nav">
-              <a class="dashboard-nav__link" href="/dashboard/watchlist">Watchlist</a>
-              <a class="dashboard-nav__link" href="/dashboard/favourite">Favourites</a>
+              <a
+                class="dashboard-nav__link <%= locals.dashboard_page === 'watchlist'? 'active' : null %>"
+                href="/dashboard/watchlist">Watchlist</a>
+              <a
+                class="dashboard-nav__link <%= locals.dashboard_page === 'favourite'? 'active' : null %>"
+                href="/dashboard/favourite">Favourites</a>
             </nav>
           </div>
           <div class="dashboard__content">
@@ -20,16 +24,21 @@
             <% if (dashboard_page === "watchlist") { %>
 
               <section class="">
-
+                <h2 class="section__title">Movies</h2>
+                <div class="u-clearfix">
                 <% movies.forEach(function(movie) { %>
-
+                  <%- include('../partials/media-thumbnail', {
+                    media: movie,
+                    mediaType: "movie"
+                  }) %>
                 <% }) %>
-
+                </div>
               </section>
 
             <% } else if (dashboard_page === "favourites") { %>
 
               <section class="">
+              <h2 class="section__title">Movies</h2>
                 <div class="u-clearfix">
                 <% movies.forEach(function(movie) { %>
                   <%- include('../partials/media-thumbnail', {

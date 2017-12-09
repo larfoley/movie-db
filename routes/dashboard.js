@@ -41,6 +41,21 @@ router.get('/favourite', function(req, res, next) {
 router.get('/watchlist', function(req, res, next) {
   if (req.user) {
 
+    var movies = req.user.movies.filter(function(movie) {
+      return movie.isInWatchlist;
+    })
+
+    var tv_shows = req.user.movies.filter(function(tv_show) {
+      return tv_show.isInWatchlist;
+    })
+
+    res.render("pages/dashboard", {
+      "isLoggedIn": !!req.user,
+      dashboard_page: 'watchlist',
+      username: req.user? req.user.username : null,
+      "movies": movies,
+      "tv_shows": tv_shows,
+    })
   } else {
     res.redirect('/login')
   }

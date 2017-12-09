@@ -159,7 +159,6 @@ router.get('/delete', function(req, res, next) {
     if (err) {
       next(err);
     } else {
-      console.log("DOC", doc);
       res.redirect('back')
     }
   })

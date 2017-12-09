@@ -5,21 +5,11 @@ var config = require('../config.js');
 
 var request = require("request");
 
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
 
-  var options = {
-    method: 'GET',
-    url: 'https://api.themoviedb.org/3/search/multi',
-    qs: {
-      page: '1',
-      language: 'en-US',
-      api_key: config.api_key,
-      query: req.body.query || ""
-    },
-    body: '{}'
-  };
+  var query = req.query.query;
 
-  request(options, function (error, response, body) {
+  request("http://localhost:3000/api/search?query=" + query, function (error, response, body) {
     if (error) throw new Error(error);
     res.render('pages/search-results', {
       results: JSON.parse(body).results || [],
