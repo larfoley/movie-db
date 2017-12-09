@@ -28,6 +28,7 @@ var favourite = require('./routes/favourite');
 var watchlist = require('./routes/watchlist');
 var movies = require('./routes/movies');
 var recommended = require('./routes/recommended');
+var cast = require('./routes/cast');
 
 var app = express();
 
@@ -117,6 +118,7 @@ app.use('/dashboard', dashboard);
 app.use('/cinema', cinema);
 app.use('/movies', movies);
 app.use('/recommended', recommended);
+app.use('/cast', cast);
 
 app.use(function(req, res, next) {
   var err = new Error('Page Not Found');
