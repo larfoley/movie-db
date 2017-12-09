@@ -29,6 +29,7 @@ router.get('/favourite', function(req, res, next) {
       username: req.user? req.user.username : null,
       "movies": movies,
       "tv_shows": tv_shows,
+      page_title: req.user.username
     })
 
   } else {

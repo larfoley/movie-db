@@ -62,7 +62,8 @@ router.get('/:media_type/:media_id', function (req, res, next) {
         username: req.user? req.user.username : null,
         media: media,
         relatedMedia: relatedMedia,
-        cast: cast
+        cast: cast,
+        page_title: media.title
       });
     })
     .catch(function (err) {
