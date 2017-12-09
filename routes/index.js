@@ -22,11 +22,11 @@ router.get('/', function(req, res, next) {
 
           for (let i = 0; i < req.user.movies.length; i++) {
 
-            // if (req.user.movies[i].id == movie.id ) {
-            //   movie.isFavourite = req.user.movies[i].isFavourite;
-            //   movie.isInWatchlist = req.user.movies[i].isInWatchlist;
-            //   break;
-            // }
+            if (req.user.movies[i].id == movie.id ) {
+              movie.isFavourite = req.user.movies[i].isFavourite;
+              movie.isInWatchlist = req.user.movies[i].isInWatchlist;
+              break;
+            }
           }
         })
 

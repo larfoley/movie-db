@@ -9,6 +9,7 @@ router.get('/add', function(req, res, next) {
     var user = req.user;
     var media_id = req.query.media_id;
     var media_type = req.query.media_type;
+    var media;
 
     // Check if user is logged in
     if (!user) {
@@ -19,8 +20,7 @@ router.get('/add', function(req, res, next) {
     if (media_id && media_type) {
 
       // Check if user has already saved this media
-      // and then save it here in the media var if they have
-      var media;
+      // and then save it in the media var if they have
 
       if (media_type === "movie") {
 
@@ -66,7 +66,7 @@ router.get('/add', function(req, res, next) {
         request(api_options, function (error, response, body) {
           if (error) throw new Error(error);
 
-          var media = JSON.parse(body);
+          media = JSON.parse(body);
           media.isFavourite = false;
           media.isInWatchlist = true;
 
