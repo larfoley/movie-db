@@ -23,7 +23,8 @@ router.get('/', function(req, res, next) {
       isLoggedIn: !!req.user,
       username: req.user? req.user.username : null,
       results: JSON.parse(body).results,
-      country: req.country
+      country: req.country,
+      page_title: "Cinema"
     });
   });
 

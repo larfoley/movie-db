@@ -14,7 +14,8 @@ router.get('/', function(req, res, next) {
     res.render('pages/search-results', {
       results: JSON.parse(body).results || [],
       username: req.user? req.user.username : null,
-      loggedIn: !!req.user
+      loggedIn: !!req.user,
+      page_title: "Search"
     });
   });
 });

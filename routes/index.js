@@ -58,7 +58,8 @@ router.get('/', function(req, res, next) {
         isLoggedIn: !!req.user,
         username: req.user? req.user.username : null,
         popularMovies: popularMovies,
-        popularTvShows: popularTvShows
+        popularTvShows: popularTvShows,
+        page_title: "Home"
       });
     })
     .catch(function (err) {

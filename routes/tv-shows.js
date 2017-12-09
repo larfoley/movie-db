@@ -37,6 +37,7 @@ router.get('/', function(req, res, next) {
       }
 
       res.render('pages/tv-shows', {
+        page_title: "TV Shows",
         activeLink: "tv-shows",
         isLoggedIn: !!req.user,
         username: req.user? req.user.username : null,

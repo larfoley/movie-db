@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
       var movies = JSON.parse(response).results;
 
       res.render('pages/movies', {
+        page_title: "Movies",
         activeLink: "movies",
         isLoggedIn: !!req.user,
         username: req.user? req.user.username : null,
