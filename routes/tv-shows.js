@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var config = require('../config.js')
-var request = require("request");
 var rp = require('request-promise');
 
 
@@ -9,29 +7,14 @@ router.get('/', function(req, res, next) {
 
   var genres, tvShows;
 
-  rp({
-    method: 'GET',
-    url: 'https://api.themoviedb.org/3/genre/tv/list',
-    qs: {
-      language: 'en-US',
-      api_key: config.api_key
-    },
-    body: '{}'})
+  rp('http://localhost:3000/api/genres/tv')
 
     .then(function (response) {
-
       genres = JSON.parse(response).genres;
+      genre = req.query.genre || "";
+      sort_by = req.query.sort_by || "";
 
-      return rp({ method: 'GET',
-      url: 'https://api.themoviedb.org/3/discover/tv',
-      qs: {
-        language: 'en-US',
-        api_key: config.api_key,
-        with_genres: req.query.genre || null,
-        sort_by: req.query.sort_by || null
-      },
-      body: '{}' })
-
+      return rp('http://localhost:3000/api/tv?genre=' + genre + '&sort_by=' + sort_by)
 
     })
 
@@ -43,9 +26,7 @@ router.get('/', function(req, res, next) {
           tv.isFavourite = false;
           tv.isInWatchlist = false;
 
-          console.log(req.user.tv_shows);
           for (let i = 0; i < req.user.tv_shows.length; i++) {
-
             if (req.user.tv_shows[i].id == tv.id ) {
               tv.isFavourite = req.user.tv_shows[i].isFavourite;
               tv.isInWatchlist = req.user.tv_shows[i].isInWatchlist;
@@ -74,7 +55,7 @@ router.get('/', function(req, res, next) {
           var filter = "";
 
           switch (req.query.sort_by) {
-            case "release_date.gte":
+            case "release_date.asc":
               filter = "Latest"
               break;
             case "popularity.desc":

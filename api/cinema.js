@@ -4,12 +4,11 @@ var router = express.Router();
 var request = require("request");
 
 router.get('/', function(req, res, next) {
-  var query = req.query.query;
 
   request(
     { method: 'GET',
-      url: 'https://api.themoviedb.org/3/search/multi',
-      qs: { api_key: config.api_key, query: query},
+      url: 'https://api.themoviedb.org/3/discover/movie',
+      qs: { api_key: config.api_key },
       body: '{}'
     }, function (error, response, body) {
       if (error) next(error);

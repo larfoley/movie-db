@@ -15,9 +15,11 @@ mongoose.connect(config.database_url);
 var db = mongoose.connection;
 var User = require('./models/User.js');
 
+
 // Routes
 var index = require('./routes/index');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 var register = require('./routes/register');
 var search = require('./routes/search');
 var tvShows = require('./routes/tv-shows');
@@ -27,7 +29,14 @@ var dashboard = require('./routes/dashboard');
 var favourite = require('./routes/favourite');
 var watchlist = require('./routes/watchlist');
 var movies = require('./routes/movies');
-var recommended = require('./routes/recommended');
+
+// Api
+var api_movies = require('./api/movies');
+var api_tv = require('./api/tv');
+var api_search = require('./api/search');
+var api_genres = require('./api/genres');
+var api_media_details = require("./api/media-details")
+var api_recommended = require('./api/user/recommended');
 
 var app = express();
 
@@ -105,8 +114,17 @@ app.use(function(req, res, next) {
   next();
 })
 
+app.use('/api/movies', api_movies);
+app.use('/api/tv', api_tv);
+app.use('/api/search', api_search);
+app.use('/api/genres', api_genres);
+app.use('/api/genres', api_genres);
+app.use('/api/media', api_media_details);
+app.use('/recommended', api_recommended);
+
 app.use('/', index);
 app.use('/login', login);
+app.use('/logout', logout);
 app.use('/register', register);
 app.use('/search', search);
 app.use('/tv-shows', tvShows);
@@ -116,7 +134,7 @@ app.use('/watchlist', watchlist);
 app.use('/dashboard', dashboard);
 app.use('/cinema', cinema);
 app.use('/movies', movies);
-app.use('/recommended', recommended);
+
 
 app.use(function(req, res, next) {
   var err = new Error('Page Not Found');

@@ -10,7 +10,7 @@
       <section class="media-search-header">
         <div class="container">
           <h1>TV Shows</h1>
-          <form class="media-search-form" action="/tv-shows" method="get">
+          <form class="media-search-form" action="/movies" method="get">
             <div class="u-inline">
               <label for="">Select a Genre</label>
               <select class="" name="genre">
@@ -29,7 +29,7 @@
                 <label for="">Sort by</label>
                 <select class="" name="sort_by">
                   <option
-                    value="release_date.gte"
+                    value="release_date.asc"
                     <%= requestedFilter === "Latest" ? "selected" : null %>
                     >
                     Latest
@@ -56,15 +56,17 @@
 
     <main class="container">
       <% if (results) { %>
-        <section class="section">
+        <%= results.length + " Results" %>
 
-          <% if (requestedGenre['name']) { %>
-
+          <% if (locals.requestedGenre && locals.requestedFilter) { %>
             <h2 class="section__title">
-              <%= requestedFilter + " " + requestedGenre.name %>
+              <%= requestedFilter + " " + (requestedGenre.name || "TV Shows") %>
+            </h2>
+          <% } else { %>
+            <h2 class="section__title">
+              Most Popular
             </h2>
           <% } %>
-
           <ul class="u-clearfix">
             <% results.forEach(function (media) { %>
 

@@ -1,6 +1,6 @@
 <div class="media-thumbnail">
 	<div class="media-thumbnail__image-wrapper">
-		<a href="/media?id=<%= media.id %>&media_type=<%= mediaType %>">
+		<a href="/media/<%= mediaType %>/<%= media.id %>">
 			<img width="500"
 				class="media-thumbnail__image"
 				src="<%= media.poster_path ?

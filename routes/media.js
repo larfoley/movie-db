@@ -3,19 +3,13 @@ var express = require('express');
 var router = express.Router();
 var rp = require('request-promise');
 
-router.get('/', function (req, res, next) {
-  var id = req.query.id;
-  var mediaType = req.query.media_type;
+
+router.get('/:media_type/:media_id', function (req, res, next) {
+  var id = req.params.media_id;
+  var media_type = req.params.media_type;
   var media, relatedMedia, cast;
 
-  rp({
-      method: 'GET',
-      url: 'https://api.themoviedb.org/3/' + mediaType + '/' + id,
-      qs: {
-        api_key: config.api_key
-      },
-      body: '{}'
-    })
+  rp('http://localhost:3000/api/media/' + media_type + "/" + id)
     .then(function (response) {
       media = JSON.parse(response);
       media.isFavourite = false;
@@ -23,7 +17,7 @@ router.get('/', function (req, res, next) {
 
       if (req.user) {
 
-        if (mediaType === "movie") {
+        if (media_type === "movie") {
 
           req.user.movies.forEach(function(movie) {
             if (movie.id == media.id) {
@@ -40,16 +34,7 @@ router.get('/', function (req, res, next) {
           })
         }
       }
-      return rp({
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/' + mediaType + '/' + id + '/similar',
-        qs: {
-          api_key: config.api_key,
-          language: 'en-US',
-          page: '1'
-        },
-        body: '{}'
-      })
+      return rp('http://localhost:3000/api/media/' + media_type + "/" + id + "/similar")
     })
     .then(function (response) {
       relatedMedia = JSON.parse(response).results;
@@ -67,19 +52,12 @@ router.get('/', function (req, res, next) {
           })
         })
       }
-      return rp({
-        method: 'GET',
-        url: 'https://api.themoviedb.org/3/' + mediaType + '/' + id + '/credits',
-        qs: {
-          api_key: config.api_key,
-        },
-        body: '{}'
-      })
+      return rp('http://localhost:3000/api/media/' + media_type + "/" + id + "/credits")
     })
     .then(function (response) {
       cast = JSON.parse(response).cast;
       res.render('pages/media', {
-        mediaType: mediaType,
+        mediaType: media_type,
         isLoggedIn: !!req.user,
         username: req.user? req.user.username : null,
         media: media,

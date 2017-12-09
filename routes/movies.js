@@ -1,36 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var config = require('../config.js')
-var request = require("request");
 var rp = require('request-promise');
 
 
 router.get('/', function(req, res, next) {
-  console.log(req.user);
+
   var genres, tvShows;
 
-  rp({
-    method: 'GET',
-    url: 'https://api.themoviedb.org/3/genre/movie/list',
-    qs: {
-      language: 'en-US',
-      api_key: config.api_key
-    },
-    body: '{}'})
+  rp('http://localhost:3000/api/genres/movie')
 
     .then(function (response) {
-
       genres = JSON.parse(response).genres;
+      genre = req.query.genre || "";
+      sort_by = req.query.sort_by || "";
 
-      return rp({ method: 'GET',
-      url: 'https://api.themoviedb.org/3/discover/movie',
-      qs: {
-        language: 'en-US',
-        api_key: config.api_key,
-        with_genres: req.query.genre || null,
-        sort_by: req.query.sort_by || null
-      },
-      body: '{}' })
+      return rp('http://localhost:3000/api/movies?genre=' + genre + '&sort_by=' + sort_by)
     })
 
     .then(function (response) {
@@ -55,7 +40,7 @@ router.get('/', function(req, res, next) {
           var filter = "";
 
           switch (req.query.sort_by) {
-            case "release_date.gte":
+            case "release_date.asc":
               filter = "Latest"
               break;
             case "popularity.desc":
@@ -65,7 +50,7 @@ router.get('/', function(req, res, next) {
               filter = "Least Popular"
               break;
             default:
-            
+
           }
 
           return filter;
