@@ -55,7 +55,7 @@
                 <% movies.forEach(function(movie) { %>
                   <%- include('../partials/media-thumbnail', {
                     media: movie,
-                    mediaType: "movies"
+                    mediaType: "movie"
                   }) %>
                 <% }) %>
                 </div>
@@ -67,7 +67,7 @@
                 <% tv_shows.forEach(function(tv_show) { %>
                   <%- include('../partials/media-thumbnail', {
                     media: tv_show,
-                    mediaType: "movies"
+                    mediaType: "tv"
                   }) %>
                 <% }) %>
                 </div>
