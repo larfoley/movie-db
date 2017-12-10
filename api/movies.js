@@ -14,7 +14,29 @@ router.get('/', function(req, res, next) {
       body: '{}'
     }, function (error, response, body) {
       if (error) next(error);
-      res.json(JSON.parse(body));
+
+      var popularMovies = JSON.parse(body).results;
+
+      if (req.user) {
+        // Check if user has movie saved
+        // and if so update the response
+        popularMovies = popularMovies.map(function(movie, i) {
+          movie.isFavourite = false;
+          movie.isInWatchlist = false;
+
+          for (let i = 0; i < req.user.movies.length; i++) {
+            if (req.user.movies[i].id == movie.id ) {
+              movie.isFavourite = req.user.movies[i].isFavourite;
+              movie.isInWatchlist = req.user.movies[i].isInWatchlist;
+              break;
+            }
+          }
+          return movie;
+        })
+      }
+
+      res.json(popularMovies);
+
   });
 
 });

@@ -30,6 +30,7 @@ var dashboard = require('./routes/dashboard');
 var favourite = require('./routes/favourite');
 var watchlist = require('./routes/watchlist');
 var movies = require('./routes/movies');
+var templates = require('./routes/templates');
 
 
 // Api
@@ -121,9 +122,9 @@ app.use('/api/movies', api_movies);
 app.use('/api/tv', api_tv);
 app.use('/api/search', api_search);
 app.use('/api/genres', api_genres);
-app.use('/api/genres', api_genres);
 app.use('/api/media', api_media_details);
 app.use('/recommended', api_recommended);
+app.use('/templates', templates);
 
 app.use('/', index);
 app.use('/login', login);
