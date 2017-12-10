@@ -53,13 +53,19 @@ router.get('/', function(req, res, next) {
           }
         })
       }
+
       res.render('pages/index', {
         activeLink: "home",
         isLoggedIn: !!req.user,
         username: req.user? req.user.username : null,
         popularMovies: popularMovies,
         popularTvShows: popularTvShows,
-        page_title: "Home"
+        page_title: "Home",
+        flash: {
+          message: req.flash('message')[0],
+          type: req.flash('type')[0]
+        }
+
       });
     })
     .catch(function (err) {

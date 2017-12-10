@@ -63,3 +63,8 @@
     </ul>
   </div>
 </nav>
+<% if (locals.flash) {
+  if (flash.message) { %>
+    <p><%= flash.message %></p>
+  <% }
+  } %>

@@ -10,6 +10,7 @@ var satelize = require('satelize');
 var passport = require('passport');
 var bcrypt = require('bcrypt');
 var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 var config = require('./config');
 mongoose.connect(config.database_url);
 var db = mongoose.connection;
@@ -29,6 +30,7 @@ var dashboard = require('./routes/dashboard');
 var favourite = require('./routes/favourite');
 var watchlist = require('./routes/watchlist');
 var movies = require('./routes/movies');
+
 
 // Api
 var api_movies = require('./api/movies');
@@ -100,6 +102,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: "cats" }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 
 app.use(function(req, res, next) {
@@ -134,13 +137,6 @@ app.use('/watchlist', watchlist);
 app.use('/dashboard', dashboard);
 app.use('/cinema', cinema);
 app.use('/movies', movies);
-
-
-app.use(function(req, res, next) {
-  var err = new Error('Page Not Found');
-  err.status = 404;
-  next(err);
-});
 
 // error handler
 app.use(function(err, req, res, next) {

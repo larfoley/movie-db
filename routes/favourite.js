@@ -106,6 +106,7 @@ router.get('/add', function(req, res, next) {
             if (err) {
               next(err);
             } else {
+              req.flash('message', 'Movie added to favourites')
               res.redirect('back')
             }
           })

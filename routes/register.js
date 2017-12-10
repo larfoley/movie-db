@@ -23,12 +23,10 @@ router.post('/', function(req, res, next) {
 
     if (user) {
       // User already exists
+      req.flash('message', 'That user already exists');
+      req.flash('type', 'error');
       return res.render('pages/register', {
         activeLink: "register",
-        flash: {
-          type: "error",
-          message: "That user already exists"
-        }
       });
     }
 
@@ -37,47 +35,60 @@ router.post('/', function(req, res, next) {
         req.body.email.trim() === "" ||
         req.body.password.trim() === ""
       ) {
+        req.flash('message', 'Some required field are black');
+        req.flash('type', 'error');
       return res.render('pages/register', {
-        activeLink: "register",
-        flash: {
-          type: "error",
-          message: "required fields are missing"
-        }
+        activeLink: "register"
       });
     }
 
     if (req.body.password !== req.body.confirm_password) {
+      req.flash('message', 'Passwords do not match');
+      req.flash('type', 'error');
+      return res.render('pages/register', {
+        activeLink: "register"
+      });
+    }
+
+    if (req.body.username.length < 3) {
+      req.flash('message', 'username must have at least 3 characters');
+      req.flash('type', 'error');
       return res.render('pages/register', {
         activeLink: "register",
-        flash: {
-          type: "error",
-          message: "Passwords do not match"
-        }
+      });
+    }
+
+    if (req.body.password.length < 8) {
+      req.flash('message', 'password must be at least 8 characters');
+      req.flash('type', 'error');
+      return res.render('pages/register', {
+        activeLink: "register"
       });
     }
 
     bcrypt.hash(req.body.password, 10, function(err, hash) {
       if (err) return next(err);
 
-      new User({
+      var user = new User({
         email: req.body.email,
         username: req.body.username,
         password: hash,
         movies: [],
         tv_shows: []
-      }).save(function(err) {
+      })
+
+      user.save(function(err) {
         if (err) {
           return next(err)
 
         } else {
           //User registration is scuccesfull
-          res.render('pages/register', {
-            activeLink: "register",
-            flash: {
-              type: "success",
-              message: "Thanks for registering"
-            }
+          req.login(user, function(err) {
+            if (err) { return next(err); }
+            req.flash('message', 'Logged in')
+            return res.redirect("/");
           });
+
         }
       })
 

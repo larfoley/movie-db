@@ -24,7 +24,8 @@ router.get('/', function(req, res, next) {
       username: req.user? req.user.username : null,
       results: JSON.parse(body).results,
       country: req.country,
-      page_title: "Cinema"
+      page_title: "Cinema",
+      
     });
   });
 

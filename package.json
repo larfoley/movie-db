@@ -24,6 +24,7 @@
     "serve-favicon": "~2.4.5"
   },
   "devDependencies": {
+    "connect-flash": "^0.1.1",
     "css-loader": "^0.28.7",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "node-sass": "^4.5.3",
