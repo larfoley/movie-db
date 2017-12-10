@@ -76,7 +76,11 @@ router.get('/', function(req, res, next) {
 
         }()),
         genres: genres,
-        results: movies
+        results: movies,
+        flash: {
+          message: req.flash("message"),
+          type: req.flash("type"),
+        }
       });
     })
 

@@ -72,7 +72,11 @@ router.get('/', function(req, res, next) {
 
         }()),
         genres: genres,
-        results: tvShows
+        results: tvShows,
+        flash: {
+          message: req.flash("message"),
+          type: req.flash("type"),
+        }
       });
     })
 

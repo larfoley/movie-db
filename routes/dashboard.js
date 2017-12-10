@@ -29,7 +29,11 @@ router.get('/favourite', function(req, res, next) {
       username: req.user? req.user.username : null,
       "movies": movies,
       "tv_shows": tv_shows,
-      page_title: req.user.username
+      page_title: req.user.username,
+      flash: {
+        message: req.flash("message"),
+        type: req.flash("type"),
+      }
     })
 
   } else {
@@ -50,14 +54,16 @@ router.get('/watchlist', function(req, res, next) {
       return tv_show.isInWatchlist;
     })
 
-    console.log(req.user);
-
     res.render("pages/dashboard", {
       "isLoggedIn": !!req.user,
       dashboard_page: 'watchlist',
       username: req.user? req.user.username : null,
       "movies": movies,
       "tv_shows": tv_shows,
+      flash: {
+        message: req.flash("message"),
+        type: req.flash("type"),
+      }
     })
   } else {
     res.redirect('/login')

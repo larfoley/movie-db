@@ -10,7 +10,11 @@ router.get('/', function(req, res, next) {
     activeLink: "login",
     isLoggedIn: !!req.user,
     username: req.user? req.user.username : null,
-    page_title: "Login"
+    page_title: "Login",
+    flash: {
+      message: req.flash("message"),
+      type: req.flash("type"),
+    }
   });
 });
 

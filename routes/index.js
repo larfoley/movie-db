@@ -61,7 +61,11 @@ router.get('/', function(req, res, next) {
         username: req.user? req.user.username : null,
         popularMovies: popularMovies,
         popularTvShows: popularTvShows,
-        page_title: "Home"
+        page_title: "Home",
+        flash: {
+          message: req.flash("message"),
+          type: req.flash("type"),
+        }
       });
     })
     .catch(function (err) {

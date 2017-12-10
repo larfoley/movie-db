@@ -12,6 +12,8 @@ router.get('/add', function(req, res, next) {
 
     // Check if user is logged in
     if (!user) {
+      req.flash("message", "Login to update your favourites");
+      req.flash('type', 'error');
       return res.redirect('/login')
     }
 
@@ -41,6 +43,8 @@ router.get('/add', function(req, res, next) {
         // so check if he has it set as a favourite
         if (media.isFavourite) {
           // redirect
+          req.flash("message", "Already added to favourites");
+          req.flash('type', 'success');
           return res.redirect('/');
         }
 
@@ -50,6 +54,8 @@ router.get('/add', function(req, res, next) {
           if (err) {
             next(err);
           } else {
+            req.flash("message", "Your favourites have been updated");
+            req.flash('type', 'success');
             res.redirect('back')
           }
         })
@@ -80,7 +86,6 @@ router.get('/add', function(req, res, next) {
 
             for (var i = 0; i < genres.length; i++) {
               if (genres[i].genre === g.name) {
-                console.log("increasing count");
                 genres[i].count++;
                 genreAlreadyExists = true;
                 break;
@@ -88,7 +93,6 @@ router.get('/add', function(req, res, next) {
             }
 
             if (!genreAlreadyExists) {
-              console.log("Adding genre");
               genres.push({genre: g.name, count: 1, id: g.id});
             }
 
@@ -106,6 +110,8 @@ router.get('/add', function(req, res, next) {
             if (err) {
               next(err);
             } else {
+              req.flash('message', 'Your favourites have been updated ')
+              req.flash('type', 'alert');
               res.redirect('back')
             }
           })
@@ -127,6 +133,8 @@ router.get('/delete', function(req, res, next) {
   var media;
 
   if (!user) {
+    req.flash("message", "Login to add movies as a favourite");
+    req.flash('type', 'error');
     return res.redirect('/login')
   }
 
@@ -135,10 +143,8 @@ router.get('/delete', function(req, res, next) {
     for (var i = 0; i < user.movies.length; i++) {
       if (user.movies[i].id === media_id) {
         if (user.movies[i].isInWatchlist === false) {
-          console.log("DELETING MOVIE");
           user.movies.splice(i, 1);
         } else {
-          console.log("DELETING MOVIE f");
           user.movies[i].isFavourite = false;
         }
         break;
@@ -149,8 +155,6 @@ router.get('/delete', function(req, res, next) {
   } else {
 
     for (var i = 0; i < user.tv_shows.length; i++) {
-      console.log("Deleting tv...");
-      console.log(user.tv_shows[i].id === media_id);
       if (user.tv_shows[i].id === media_id) {
         if (user.tv_shows[i].isInWatchlist === false) {
           user.tv_shows.splice(i, 1);
@@ -167,6 +171,8 @@ router.get('/delete', function(req, res, next) {
     if (err) {
       next(err);
     } else {
+      req.flash("message", "Your favourites have been updated");
+      req.flash('type', 'success');
       res.redirect('back')
     }
   })

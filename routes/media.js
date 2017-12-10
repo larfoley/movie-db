@@ -63,7 +63,11 @@ router.get('/:media_type/:media_id', function (req, res, next) {
         media: media,
         relatedMedia: relatedMedia,
         cast: cast,
-        page_title: media.title || media.name
+        page_title: media.title || media.name,
+        flash: {
+          message: req.flash("message"),
+          type: req.flash("type"),
+        }
       });
     })
     .catch(function (err) {
