@@ -13,6 +13,8 @@ router.get('/add', function(req, res, next) {
 
     // Check if user is logged in
     if (!user) {
+      req.flash('message', 'Your favourites have been updated ')
+      req.flash('type', 'success');
       return res.redirect('/login')
     }
 
@@ -41,6 +43,8 @@ router.get('/add', function(req, res, next) {
         // so check if he has it set as a favourite
         if (media.isInWatchlist) {
           // redirect
+          req.flash('message', 'Your favourites have been updated ')
+          req.flash('type', 'success');
           return res.redirect('/');
         }
 
@@ -50,6 +54,8 @@ router.get('/add', function(req, res, next) {
           if (err) {
             next(err);
           } else {
+            req.flash('message', 'Your favourites have been updated ')
+            req.flash('type', 'success');
             res.redirect('back')
           }
         })
@@ -80,7 +86,6 @@ router.get('/add', function(req, res, next) {
 
             for (var i = 0; i < genres.length; i++) {
               if (genres[i].genre === g.name) {
-                console.log("increasing count");
                 genres[i].count++;
                 genreAlreadyExists = true;
                 break;
@@ -88,7 +93,6 @@ router.get('/add', function(req, res, next) {
             }
 
             if (!genreAlreadyExists) {
-              console.log("Adding genre");
               genres.push({genre: g.name, count: 1});
             }
 
@@ -106,6 +110,8 @@ router.get('/add', function(req, res, next) {
             if (err) {
               next(err);
             } else {
+              req.flash('message', 'Your favourites have been updated ')
+              req.flash('type', 'success');
               res.redirect('back')
             }
           })
@@ -127,6 +133,8 @@ router.get('/delete', function(req, res, next) {
   var media;
 
   if (!user) {
+    req.flash('message', 'You must be logged in to do that ')
+    req.flash('type', 'error');
     return res.redirect('/login')
   }
 
@@ -159,6 +167,8 @@ router.get('/delete', function(req, res, next) {
     if (err) {
       next(err);
     } else {
+      req.flash('message', 'Your favourites have been updated ')
+      req.flash('type', 'success');
       res.redirect('back')
     }
   })

@@ -11,6 +11,7 @@ var passport = require('passport');
 var bcrypt = require('bcrypt');
 var LocalStrategy = require('passport-local').Strategy;
 var config = require('./config');
+var flash = require("connect-flash")
 mongoose.connect(config.database_url);
 var db = mongoose.connection;
 var User = require('./models/User.js');
@@ -102,6 +103,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: "cats" }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 
 
 app.use(function(req, res, next) {

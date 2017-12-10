@@ -10,23 +10,32 @@ router.get('/', function(req, res, next) {
     activeLink: "login",
     isLoggedIn: !!req.user,
     username: req.user? req.user.username : null,
-    page_title: "Login"
+    page_title: "Login",
+    flash: {
+      message: req.flash("message"),
+      type: req.flash("type"),
+    }
   });
 });
 
-router.post('/',
-  function(req, res, next) {
-    if (req.user) {
-      return res.redirect('/');
+router.post('/',function(req, res, next) {
+  passport.authenticate('local', function(err, user, info) {
+    if (err) return next(err)
+
+    if (!user) {
+      req.flash("message", "Invalid username or password")
+      req.flash("type", "error")
+      return res.redirect('/login');
     }
-    next()
-  },
-  passport.authenticate('local'),
-  function(req, res) {
-    // This only gets called if user is logged in
-    console.log('User is logged in');
-    return res.redirect('back');
-  });
+
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      req.flash("message", "Logged In")
+      req.flash("type", "success")
+      return res.redirect('/');
+    });
+  })(req, res, next);
+})
 
 
 module.exports = router;

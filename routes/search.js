@@ -15,7 +15,11 @@ router.get('/', function(req, res, next) {
       results: JSON.parse(body).results || [],
       username: req.user? req.user.username : null,
       loggedIn: !!req.user,
-      page_title: "Search"
+      page_title: "Search",
+      flash: {
+        message: req.flash("message"),
+        type: req.flash("type"),
+      }
     });
   });
 });
