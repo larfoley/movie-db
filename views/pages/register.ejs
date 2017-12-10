@@ -11,11 +11,11 @@
         <% include ../partials/flash-message %>
         <div class="form-container">
           <h2 class="form-heading">Register</h2>
-          <form class="form" action="/register" method="POST">
-            <input class="form-input" type="text" placeholder="  Username *" name="username" required>
-            <input class="form-input" type="email" placeholder="  Email *" name="email" required>
-            <input class="form-input" type="password" placeholder="  Password *" name="password" required>
-            <input class="form-input" type="password" placeholder="  Confirm Password *" name="confirm_password" required>
+          <form class="form register" action="/register" method="POST">
+            <input class="form-input username" type="text" placeholder="  Username *" name="username" required>
+            <input class="form-input email" type="email" placeholder="  Email *" name="email" required>
+            <input class="form-input password" type="password" placeholder="  Password *" name="password" required>
+            <input class="form-input confirm-password" type="password" placeholder="  Confirm Password *" name="confirm_password" required>
             <input class="form-input form-input--submit" type="submit" value="Sign Up">
           </form>
         </div>
