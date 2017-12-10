@@ -111,7 +111,7 @@ router.get('/add', function(req, res, next) {
               next(err);
             } else {
               req.flash('message', 'Your favourites have been updated ')
-              req.flash('type', 'alert');
+              req.flash('type', 'success');
               res.redirect('back')
             }
           })

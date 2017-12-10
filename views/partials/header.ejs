@@ -65,9 +65,9 @@
 </nav>
 
 <% if (locals.flash) { %>
-  <% if (flash.message) { %>
-    <% if (flash.message.lenght > 0) { %>
-      <%= flash.message %>
+    <% if (flash.message) { %>
+      <% if (flash.message.length > 0) { %>
+        <%- include('../partials/flash-message', flash) %>
+      <% } %>
     <% } %>
-  <% } %>
 <% } %>
