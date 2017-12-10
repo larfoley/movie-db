@@ -147,8 +147,8 @@ router.get('/delete', function(req, res, next) {
   } else {
 
     for (var i = 0; i < user.tv_shows.length; i++) {
-      if (tv_shows[i].id === media_id) {
-        tv_shows.splice(i, 1);
+      if (user.tv_shows[i].id === media_id) {
+        user.tv_shows.splice(i, 1);
         break;
       }
     }

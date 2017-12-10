@@ -19,7 +19,7 @@ router.get('/favourite', function(req, res, next) {
       return movie.isFavourite;
     })
 
-    var tv_shows = req.user.movies.filter(function(tv_show) {
+    var tv_shows = req.user.tv_shows.filter(function(tv_show) {
       return tv_show.isFavourite;
     })
 
@@ -46,9 +46,11 @@ router.get('/watchlist', function(req, res, next) {
       return movie.isInWatchlist;
     })
 
-    var tv_shows = req.user.movies.filter(function(tv_show) {
+    var tv_shows = req.user.tv_shows.filter(function(tv_show) {
       return tv_show.isInWatchlist;
     })
+
+    console.log(req.user);
 
     res.render("pages/dashboard", {
       "isLoggedIn": !!req.user,

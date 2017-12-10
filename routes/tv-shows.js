@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     })
 
     .then(function (response) {
-      var tvShows = JSON.parse(response).results;
+      var tvShows = JSON.parse(response);
 
       if (req.user) {
         tvShows.forEach(function(tv) {
