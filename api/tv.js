@@ -23,7 +23,27 @@ router.get('/', function(req, res, next) {
 
   request(options, function (error, response, body) {
       if (error) next(error);
-      res.json(JSON.parse(body));
+
+      popularTvShows = JSON.parse(body).results;
+
+      if (req.user) {
+        // Check if user has tv show saved
+        // and if so update the response
+        popularTvShows.forEach(function(tvShow, i) {
+          tvShow.isFavourite = false;
+          tvShow.isInWatchlist = false;
+
+          for (let i = 0; i < req.user.tv_shows.length; i++) {
+            if (req.user.tv_shows[i].id == tvShow.id ) {
+              tvShow.isFavourite = req.user.tv_shows[i].isFavourite;
+              tvShow.isInWatchlist = req.user.tv_shows[i].isInWatchlist;
+              break;
+            }
+          }
+        })
+      }
+
+      res.json(popularTvShows);
   });
 
 });

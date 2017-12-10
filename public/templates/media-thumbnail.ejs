@@ -1,0 +1,100 @@
+<div class="media-thumbnail">
+	<div class="media-thumbnail__image-wrapper">
+		<a href="/media/<%= mediaType %>/<%= media.id %>">
+			<img width="500"
+				class="media-thumbnail__image"
+				src="<%= media.poster_path ?
+					'https://image.tmdb.org/t/p/w500'+ media.poster_path :
+					'http://via.placeholder.com/500x735' %>"
+				alt="<%= media.title %>"
+			>
+
+			<div class="media-thumbnail__overlay">
+				<div class="media-thumbnail__more-info">
+					<h3>View More Info</h3>
+					<i class="fa fa-search-plus fa-3x" aria-hidden="true"></i>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="media-thumbnail__info">
+		<h3 class="media-thumbnail__title"><%= media.title || media.name %></h3>
+		<% if (mediaType === "movie") {%>
+			<div class="media-thumbnail__year">
+				<%= media.year_released %>
+			</div>
+		<% } %>
+		<div class="media-thumbnail__rating">
+			<% var rating = (Math.round((media.vote_average / 2) * 2) / 2).toFixed(1) %>
+			<% for(var i = 0; i< Math.floor(rating); i++){ %>
+				<i class="fa fa-star media-thumbnail__star" aria-hidden="true"></i>
+				<% if(i == Math.floor(rating)-1 && rating % 1 > 0){ %>
+					<i class="fa fa-star-half-o media-thumbnail__star" aria-hidden="true"></i>
+				<% } %>
+			<% } %>
+			<% for(var j = 0; j < 5 - Math.ceil(rating); j++){ %>
+				<i class="fa fa-star-o media-thumbnail__star" aria-hidden="true"></i>
+			<% } %>
+		</div>
+		<div>
+			<% if (locals.isLoggedIn) { %>
+
+				<% if(media.isFavourite === true) { %>
+
+					<a
+						href="<%= '/favourite/delete?media_type=' + mediaType + '&media_id=' + media.id %>"
+						class="media-thumbnail__link isFavourite"
+						title="Remove from favourites"
+					>
+						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+					</a>
+
+				<% } else { %>
+
+					<a
+						href="<%= '/favourite/add?media_type=' + mediaType + '&media_id=' + media.id %>"
+						class="media-thumbnail__link"
+						title="Add to favourites"
+					>
+						<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+					</a>
+				<% } %>
+
+				<% if(media.isInWatchlist === true) { %>
+
+
+					<a
+						href="<%= '/watchlist/delete?media_type=' + mediaType + '&media_id=' + media.id %>"
+						class="media-thumbnail__link isInWatchList"
+						title="Remove from watchlist"
+					>
+						<i class="icon fa fa-plus" aria-hidden="true"></i>
+					</a>
+
+				<% } else { %>
+
+					<a
+						href="<%= '/watchlist/add?media_type=' + mediaType + '&media_id=' + media.id %>"
+						class="media-thumbnail__link"
+						title="Add to watchlist"
+					>
+						<i class="icon fa fa-plus" aria-hidden="true"></i>
+					</a>
+				<% } %>
+
+			<% } else { %>
+
+				<a href="/login" class="media-thumbnail__link" title="Login to add to favourites">
+					<i class="icon fa fa-heart-o" aria-hidden="true"></i>
+				</a>
+				<a href="/login" class="media-thumbnail__link" title="Login to add to wathclist">
+					<i class="icon fa fa-plus" aria-hidden="true"></i>
+				</a>
+			<% } %>
+
+			<a href="#" class="media-thumbnail__link">
+				<i class="icon fa fa-share-alt" aria-hidden="true"></i>
+			</a>
+		</div>
+	</div>
+</div>

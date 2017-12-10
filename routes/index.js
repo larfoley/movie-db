@@ -12,34 +12,34 @@ router.get('/', function(req, res, next) {
   rp('http://localhost:3000/api/movies')
     .then(function (response) {
       // Get popularMovies
-      popularMovies = JSON.parse(response).results;
+      popularMovies = JSON.parse(response)
+      return rp('http://localhost:3000/api/tv')
+    })
+    .then(function (response) {
+      // Get popularTvShows
+      popularTvShows = JSON.parse(response);
+    })
+    .then(function () {
 
       if (req.user) {
-
-        popularMovies.forEach(function(movie, i) {
+        // Check if user has movie saved
+        // and if so update the response
+        popularMovies = popularMovies.map(function(movie, i) {
           movie.isFavourite = false;
           movie.isInWatchlist = false;
 
           for (let i = 0; i < req.user.movies.length; i++) {
-
             if (req.user.movies[i].id == movie.id ) {
               movie.isFavourite = req.user.movies[i].isFavourite;
               movie.isInWatchlist = req.user.movies[i].isInWatchlist;
               break;
             }
           }
+          return movie;
         })
 
-      }
-
-      return rp('http://localhost:3000/api/tv')
-    })
-    .then(function (response) {
-      // Get popularTvShows
-      popularTvShows = JSON.parse(response).results;
-
-      if (req.user) {
-
+        // Check if user has tv show saved
+        // and if so update the response
         popularTvShows.forEach(function(tvShow, i) {
           tvShow.isFavourite = false;
           tvShow.isInWatchlist = false;
@@ -52,7 +52,9 @@ router.get('/', function(req, res, next) {
             }
           }
         })
+
       }
+
       res.render('pages/index', {
         activeLink: "home",
         isLoggedIn: !!req.user,

@@ -2,7 +2,7 @@ var ejs = require("./vendor/ejs.js");
 
 module.exports = (function() {
 
-  var path = "/templates/"
+  var path = "http://localhost:300/templates/"
 
   return {
 
