@@ -3,3 +3,4 @@ import './styles/index.scss';
 // import json from "./js/getJson.js";
 import './js/nav.js';
 import './js/form.js';
+import "./js/media-search.js"
